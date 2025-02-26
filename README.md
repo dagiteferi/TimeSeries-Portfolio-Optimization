@@ -43,7 +43,7 @@ This project focuses on leveraging **time series forecasting** and **portfolio o
 ## 🛠️ Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-dagiteferi/TimeSeries-Portfolio-Optimization.git
+   git clone https://github.com/dagiteferi/TimeSeries-Portfolio-Optimization.git
    ```
 2.Navigate to the project directory:
 
