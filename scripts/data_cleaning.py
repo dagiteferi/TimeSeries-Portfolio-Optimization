@@ -74,33 +74,33 @@ def check_missing_values(data, ticker):
         logging.error(f"Error checking missing values for {ticker}: {e}")
         return None
 
-def handle_missing_values(data, ticker, method="ffill"):
-    """
-    Handle missing values in the data.
+# def handle_missing_values(data, ticker, method="ffill"):
+#     """
+#     Handle missing values in the data.
     
-    Parameters:
-        data (pd.DataFrame): The data to clean.
-        ticker (str): The ticker symbol (e.g., "TSLA").
-        method (str): Method to handle missing values ("ffill", "bfill", "drop", etc.).
-    """
-    try:
-        logging.info(f"Handling missing values for {ticker} using method: {method}...")
-        if method == "ffill":
-            data.fillna(method="ffill", inplace=True)
-        elif method == "bfill":
-            data.fillna(method="bfill", inplace=True)
-        elif method == "drop":
-            data.dropna(inplace=True)
-        else:
-            logging.warning(f"Unsupported method: {method}. Using 'ffill' by default.")
-            data.fillna(method="ffill", inplace=True)
+#     Parameters:
+#         data (pd.DataFrame): The data to clean.
+#         ticker (str): The ticker symbol (e.g., "TSLA").
+#         method (str): Method to handle missing values ("ffill", "bfill", "drop", etc.).
+#     """
+#     try:
+#         logging.info(f"Handling missing values for {ticker} using method: {method}...")
+#         if method == "ffill":
+#             data.fillna(method="ffill", inplace=True)
+#         elif method == "bfill":
+#             data.fillna(method="bfill", inplace=True)
+#         elif method == "drop":
+#             data.dropna(inplace=True)
+#         else:
+#             logging.warning(f"Unsupported method: {method}. Using 'ffill' by default.")
+#             data.fillna(method="ffill", inplace=True)
 
-        logging.info(f"Missing values after handling for {ticker}:")
-        logging.info(data.isnull().sum())
-        return data
-    except Exception as e:
-        logging.error(f"Error handling missing values for {ticker}: {e}")
-        return None
+#         logging.info(f"Missing values after handling for {ticker}:")
+#         logging.info(data.isnull().sum())
+#         return data
+#     except Exception as e:
+#         logging.error(f"Error handling missing values for {ticker}: {e}")
+#         return None
 
 def normalize_data(data, ticker, column="Close"):
     """
