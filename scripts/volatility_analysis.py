@@ -27,9 +27,6 @@ def analyze_volatility(data, ticker, window=30):
         data (pd.DataFrame): The dataset containing the closing prices.
         ticker (str): The ticker symbol (e.g., "TSLA").
         window (int): The rolling window size (default is 30 days).
-    
-    Returns:
-        pd.DataFrame: The dataset with added rolling mean and rolling standard deviation columns.
     """
     try:
         logging.info(f"Analyzing volatility for {ticker} with a {window}-day rolling window...")
@@ -38,12 +35,15 @@ def analyze_volatility(data, ticker, window=30):
         data["Rolling_Mean"] = data["Close"].rolling(window=window).mean()
         data["Rolling_Std"] = data["Close"].rolling(window=window).std()
         
+        # Drop rows with NaN values
+        data_cleaned = data.dropna()
+        
         # Plot the results
         logging.info(f"Plotting rolling statistics for {ticker}...")
         plt.figure(figsize=(12, 6))
-        plt.plot(data.index, data["Close"], label="Closing Price", color="blue", alpha=0.7)
-        plt.plot(data.index, data["Rolling_Mean"], label=f"{window}-Day Rolling Mean", color="red")
-        plt.plot(data.index, data["Rolling_Std"], label=f"{window}-Day Rolling Std", color="orange")
+        plt.plot(data_cleaned.index, data_cleaned["Close"], label="Closing Price", color="blue", alpha=0.7)
+        plt.plot(data_cleaned.index, data_cleaned["Rolling_Mean"], label=f"{window}-Day Rolling Mean", color="red")
+        plt.plot(data_cleaned.index, data_cleaned["Rolling_Std"], label=f"{window}-Day Rolling Std", color="orange")
         plt.title(f"{ticker} Volatility Analysis (Rolling Statistics)")
         plt.xlabel("Date")
         plt.ylabel("Price")
@@ -52,7 +52,7 @@ def analyze_volatility(data, ticker, window=30):
         plt.show()
         
         logging.info(f"Volatility analysis completed for {ticker}.")
-        return data  # Return the dataset with rolling statistics
+        return data_cleaned  # Return the cleaned dataset
     except Exception as e:
         logging.error(f"Error analyzing volatility for {ticker}: {e}")
         return None
