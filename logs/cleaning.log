@@ -159,3 +159,187 @@ High      0
 Low       0
 Volume    0
 dtype: int64
+2025-02-27 13:04:50,418 - INFO - 'Close' column normalized for TSLA.
+2025-02-27 13:04:50,426 - INFO - 'Close' column normalized for BND.
+2025-02-27 13:04:50,433 - INFO - 'Close' column normalized for SPY.
+2025-02-27 13:09:47,674 - INFO - Loading data for BND...
+2025-02-27 13:09:47,691 - INFO - Successfully loaded data for BND from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
+2025-02-27 13:09:47,692 - INFO - Loading data for SPY...
+2025-02-27 13:09:47,704 - INFO - Successfully loaded data for SPY from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
+2025-02-27 13:09:47,704 - INFO - Loading data for TSLA...
+2025-02-27 13:09:47,716 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-27 13:09:47,748 - INFO - Basic statistics for TSLA:
+2025-02-27 13:09:47,765 - INFO -                                 Date        Price        Close         High  \
+count                           2534  2534.000000  2534.000000  2534.000000   
+mean   2020-01-15 07:57:20.883977984   117.888946   120.516497   115.137325   
+min              2015-01-05 00:00:00     9.578000    10.331333     9.403333   
+25%              2017-07-11 06:00:00    17.246000    17.530834    16.943500   
+50%              2020-01-15 12:00:00    30.784333    32.640001    29.992001   
+75%              2022-07-21 18:00:00   221.622501   226.718338   217.090828   
+max              2025-01-30 00:00:00   479.859985   488.540009   457.510010   
+std                              NaN   116.513225   119.241096   113.703698   
+
+               Low        Volume  
+count  2534.000000  2.534000e+03  
+mean    117.918317  1.120468e+08  
+min       9.488000  1.062000e+07  
+25%      17.269167  6.679792e+07  
+50%      31.440000  9.264390e+07  
+75%     222.661667  1.294490e+08  
+max     475.899994  9.140820e+08  
+std     116.616621  7.388527e+07  
+2025-02-27 13:09:47,786 - INFO - Basic statistics for BND:
+2025-02-27 13:09:47,798 - INFO -                                 Date        Price        Close         High  \
+count                           2534  2534.000000  2534.000000  2534.000000   
+mean   2020-01-15 07:57:20.883977984    69.292102    69.393940    69.188691   
+min              2015-01-05 00:00:00    61.860874    61.937357    61.822635   
+25%              2017-07-11 06:00:00    65.573730    65.632010    65.483971   
+50%              2020-01-15 12:00:00    68.329895    68.459567    68.170516   
+75%              2022-07-21 18:00:00    72.880764    72.946475    72.730177   
+max              2025-01-30 00:00:00    78.823273    78.920188    78.788036   
+std                              NaN     4.791233     4.799461     4.781184   
+
+               Low        Volume  
+count  2534.000000  2.534000e+03  
+mean     69.295942  4.233995e+06  
+min      61.891469  0.000000e+00  
+25%      65.558048  2.056000e+06  
+50%      68.311507  3.805900e+06  
+75%      72.846293  5.626950e+06  
+max      78.884958  3.193720e+07  
+std       4.792191  2.796348e+06  
+2025-02-27 13:09:47,817 - INFO - Basic statistics for SPY:
+2025-02-27 13:09:47,827 - INFO -                                 Date        Price        Close         High  \
+count                           2534  2534.000000  2534.000000  2534.000000   
+mean   2020-01-15 07:57:20.883977984   316.124021   317.782453   314.214169   
+min              2015-01-05 00:00:00   156.800842   157.864136   154.676868   
+25%              2017-07-11 06:00:00   214.869541   215.867530   214.283792   
+50%              2020-01-15 12:00:00   277.234024   278.362897   276.101228   
+75%              2022-07-21 18:00:00   405.963654   409.202180   402.906834   
+max              2025-01-30 00:00:00   609.750000   610.780029   606.799988   
+std                              NaN   117.915718   118.475280   117.258801   
+
+               Low        Volume  
+count  2534.000000  2.534000e+03  
+mean    316.077671  8.713300e+07  
+min     156.354943  2.027000e+07  
+25%     215.113932  5.861922e+07  
+50%     277.271237  7.642180e+07  
+75%     406.109768  1.017314e+08  
+max     609.809998  5.072443e+08  
+std     117.910828  4.487621e+07  
+2025-02-27 13:09:47,861 - INFO - Data types before cleaning for TSLA:
+2025-02-27 13:09:47,862 - INFO - Date      datetime64[ns]
+Price            float64
+Close            float64
+High             float64
+Low              float64
+Volume             int64
+dtype: object
+2025-02-27 13:09:47,868 - INFO - 'Date' column converted to datetime for TSLA.
+2025-02-27 13:09:47,868 - INFO - Data types after cleaning for TSLA:
+2025-02-27 13:09:47,868 - INFO - Date      datetime64[ns]
+Price            float64
+Close            float64
+High             float64
+Low              float64
+Volume             int64
+dtype: object
+2025-02-27 13:09:47,869 - INFO - Data types before cleaning for BND:
+2025-02-27 13:09:47,869 - INFO - Date      datetime64[ns]
+Price            float64
+Close            float64
+High             float64
+Low              float64
+Volume             int64
+dtype: object
+2025-02-27 13:09:47,870 - INFO - 'Date' column converted to datetime for BND.
+2025-02-27 13:09:47,870 - INFO - Data types after cleaning for BND:
+2025-02-27 13:09:47,870 - INFO - Date      datetime64[ns]
+Price            float64
+Close            float64
+High             float64
+Low              float64
+Volume             int64
+dtype: object
+2025-02-27 13:09:47,870 - INFO - Data types before cleaning for SPY:
+2025-02-27 13:09:47,870 - INFO - Date      datetime64[ns]
+Price            float64
+Close            float64
+High             float64
+Low              float64
+Volume             int64
+dtype: object
+2025-02-27 13:09:47,870 - INFO - 'Date' column converted to datetime for SPY.
+2025-02-27 13:09:47,870 - INFO - Data types after cleaning for SPY:
+2025-02-27 13:09:47,870 - INFO - Date      datetime64[ns]
+Price            float64
+Close            float64
+High             float64
+Low              float64
+Volume             int64
+dtype: object
+2025-02-27 13:09:47,895 - INFO - Basic statistics for TSLA:
+2025-02-27 13:09:47,918 - INFO -                                 Date        Price        Close         High  \
+count                           2534  2534.000000  2534.000000  2534.000000   
+mean   2020-01-15 07:57:20.883977984   117.888946   120.516497   115.137325   
+min              2015-01-05 00:00:00     9.578000    10.331333     9.403333   
+25%              2017-07-11 06:00:00    17.246000    17.530834    16.943500   
+50%              2020-01-15 12:00:00    30.784333    32.640001    29.992001   
+75%              2022-07-21 18:00:00   221.622501   226.718338   217.090828   
+max              2025-01-30 00:00:00   479.859985   488.540009   457.510010   
+std                              NaN   116.513225   119.241096   113.703698   
+
+               Low        Volume  
+count  2534.000000  2.534000e+03  
+mean    117.918317  1.120468e+08  
+min       9.488000  1.062000e+07  
+25%      17.269167  6.679792e+07  
+50%      31.440000  9.264390e+07  
+75%     222.661667  1.294490e+08  
+max     475.899994  9.140820e+08  
+std     116.616621  7.388527e+07  
+2025-02-27 13:09:47,940 - INFO - Missing values for TSLA:
+2025-02-27 13:09:47,940 - INFO - Date      0
+Price     0
+Close     0
+High      0
+Low       0
+Volume    0
+dtype: int64
+2025-02-27 13:09:47,940 - INFO - Missing values for BND:
+2025-02-27 13:09:47,945 - INFO - Date      0
+Price     0
+Close     0
+High      0
+Low       0
+Volume    0
+dtype: int64
+2025-02-27 13:09:47,947 - INFO - Missing values for spy:
+2025-02-27 13:09:47,948 - INFO - Date      0
+Price     0
+Close     0
+High      0
+Low       0
+Volume    0
+dtype: int64
+2025-02-27 13:57:28,619 - INFO - Visualizing closing price for TSLA...
+2025-02-27 13:57:28,976 - INFO - Closing price visualization completed for TSLA.
+2025-02-27 13:57:28,977 - INFO - Calculating daily returns for TSLA...
+2025-02-27 13:57:29,159 - INFO - Daily returns calculation and visualization completed for TSLA.
+2025-02-27 13:57:29,160 - INFO - Analyzing volatility for TSLA using 30-day rolling statistics...
+2025-02-27 13:57:29,340 - INFO - Volatility analysis completed for TSLA.
+2025-02-27 13:57:29,340 - INFO - Detecting outliers for TSLA using Z-score method...
+2025-02-27 13:57:29,505 - INFO - Outlier detection completed for TSLA.
+2025-02-27 13:57:29,505 - INFO - Analyzing extreme returns for TSLA...
+2025-02-27 13:57:29,682 - INFO - Extreme returns analysis completed for TSLA.
+2025-02-27 13:57:57,900 - INFO - Visualizing closing price for BND...
+2025-02-27 13:57:58,045 - INFO - Closing price visualization completed for BND.
+2025-02-27 13:57:58,045 - INFO - Calculating daily returns for BND...
+2025-02-27 13:57:58,184 - INFO - Daily returns calculation and visualization completed for BND.
+2025-02-27 13:57:58,184 - INFO - Analyzing volatility for BND using 30-day rolling statistics...
+2025-02-27 13:57:58,341 - INFO - Volatility analysis completed for BND.
+2025-02-27 13:57:58,341 - INFO - Detecting outliers for BND using Z-score method...
+2025-02-27 13:57:58,496 - INFO - Outlier detection completed for BND.
+2025-02-27 13:57:58,496 - INFO - Analyzing extreme returns for BND...
+2025-02-27 13:57:58,687 - INFO - Extreme returns analysis completed for BND.
