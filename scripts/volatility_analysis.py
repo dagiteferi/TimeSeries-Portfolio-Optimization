@@ -27,6 +27,9 @@ def analyze_volatility(data, ticker, window=30):
         data (pd.DataFrame): The dataset containing the closing prices.
         ticker (str): The ticker symbol (e.g., "TSLA").
         window (int): The rolling window size (default is 30 days).
+    
+    Returns:
+        pd.DataFrame: The dataset with added rolling mean and rolling standard deviation columns.
     """
     try:
         logging.info(f"Analyzing volatility for {ticker} with a {window}-day rolling window...")
@@ -47,6 +50,9 @@ def analyze_volatility(data, ticker, window=30):
         plt.legend()
         plt.grid()
         plt.show()
+        
         logging.info(f"Volatility analysis completed for {ticker}.")
+        return data  # Return the dataset with rolling statistics
     except Exception as e:
         logging.error(f"Error analyzing volatility for {ticker}: {e}")
+        return None
