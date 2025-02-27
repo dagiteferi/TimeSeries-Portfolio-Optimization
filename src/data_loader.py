@@ -48,6 +48,10 @@ def load_data(ticker):
             logging.error(f"Unexpected number of columns in {ticker}_data.csv: {len(data.columns)}")
             return None
         
+        # Reset the index to make Date a column and rename it
+        data.reset_index(inplace=True)
+        data.rename(columns={data.columns[0]: "Date"}, inplace=True)
+        
         logging.info(f"Successfully loaded data for {ticker} from {file_path}.")
         return data
     except Exception as e:
