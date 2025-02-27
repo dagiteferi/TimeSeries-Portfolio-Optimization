@@ -17,25 +17,31 @@ logging.basicConfig(
     filemode="w"                    # Overwrite the log file each time
 )
 
-def clean_and_understand_data(data, ticker):
+def check_basic_statistics(data, ticker):
     """
-    Clean and understand the data for a given ticker.
+    Check basic statistics of the data.
     
     Parameters:
-        data (pd.DataFrame): The data to clean and analyze.
+        data (pd.DataFrame): The data to analyze.
         ticker (str): The ticker symbol (e.g., "TSLA").
-    
-    Returns:
-        pd.DataFrame: Cleaned and normalized data.
     """
     try:
-        logging.info(f"Cleaning and analyzing data for {ticker}...")
-
-        # Step 1: Check basic statistics
         logging.info(f"Basic statistics for {ticker}:")
         logging.info(data.describe())
+        return data.describe()
+    except Exception as e:
+        logging.error(f"Error checking basic statistics for {ticker}: {e}")
+        return None
 
-        # Step 2: Ensure all columns have appropriate data types
+def ensure_data_types(data, ticker):
+    """
+    Ensure all columns have appropriate data types.
+    
+    Parameters:
+        data (pd.DataFrame): The data to clean.
+        ticker (str): The ticker symbol (e.g., "TSLA").
+    """
+    try:
         logging.info(f"Data types before cleaning for {ticker}:")
         logging.info(data.dtypes)
 
@@ -44,27 +50,75 @@ def clean_and_understand_data(data, ticker):
             data["Date"] = pd.to_datetime(data["Date"])
             logging.info(f"'Date' column converted to datetime for {ticker}.")
 
-        # Step 3: Check for missing values
-        logging.info(f"Missing values before handling for {ticker}:")
-        logging.info(data.isnull().sum())
+        logging.info(f"Data types after cleaning for {ticker}:")
+        logging.info(data.dtypes)
+        return data
+    except Exception as e:
+        logging.error(f"Error ensuring data types for {ticker}: {e}")
+        return None
 
-        # Handle missing values
-        data.fillna(method="ffill", inplace=True)  # Forward fill missing values
+def check_missing_values(data, ticker):
+    """
+    Check for missing values in the data.
+    
+    Parameters:
+        data (pd.DataFrame): The data to analyze.
+        ticker (str): The ticker symbol (e.g., "TSLA").
+    """
+    try:
+        logging.info(f"Missing values for {ticker}:")
+        missing_values = data.isnull().sum()
+        logging.info(missing_values)
+        return missing_values
+    except Exception as e:
+        logging.error(f"Error checking missing values for {ticker}: {e}")
+        return None
+
+def handle_missing_values(data, ticker, method="ffill"):
+    """
+    Handle missing values in the data.
+    
+    Parameters:
+        data (pd.DataFrame): The data to clean.
+        ticker (str): The ticker symbol (e.g., "TSLA").
+        method (str): Method to handle missing values ("ffill", "bfill", "drop", etc.).
+    """
+    try:
+        logging.info(f"Handling missing values for {ticker} using method: {method}...")
+        if method == "ffill":
+            data.fillna(method="ffill", inplace=True)
+        elif method == "bfill":
+            data.fillna(method="bfill", inplace=True)
+        elif method == "drop":
+            data.dropna(inplace=True)
+        else:
+            logging.warning(f"Unsupported method: {method}. Using 'ffill' by default.")
+            data.fillna(method="ffill", inplace=True)
+
         logging.info(f"Missing values after handling for {ticker}:")
         logging.info(data.isnull().sum())
-
-        # Step 4: Normalize or scale the data (if required)
-        # Normalize the 'Close' column for machine learning models
-        if "Close" in data.columns:
-            scaler = MinMaxScaler()
-            data["Close_Normalized"] = scaler.fit_transform(data[["Close"]])
-            logging.info(f"'Close' column normalized for {ticker}.")
-        else:
-            logging.warning(f"'Close' column not found in data for {ticker}. Skipping normalization.")
-
-        logging.info(f"Data cleaning and understanding completed for {ticker}.")
         return data
-
     except Exception as e:
-        logging.error(f"Error cleaning and analyzing data for {ticker}: {e}")
+        logging.error(f"Error handling missing values for {ticker}: {e}")
+        return None
+
+def normalize_data(data, ticker, column="Close"):
+    """
+    Normalize or scale a specific column in the data.
+    
+    Parameters:
+        data (pd.DataFrame): The data to normalize.
+        ticker (str): The ticker symbol (e.g., "TSLA").
+        column (str): The column to normalize (default is "Close").
+    """
+    try:
+        if column in data.columns:
+            scaler = MinMaxScaler()
+            data[f"{column}_Normalized"] = scaler.fit_transform(data[[column]])
+            logging.info(f"'{column}' column normalized for {ticker}.")
+        else:
+            logging.warning(f"'{column}' column not found in data for {ticker}. Skipping normalization.")
+        return data
+    except Exception as e:
+        logging.error(f"Error normalizing data for {ticker}: {e}")
         return None
