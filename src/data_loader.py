@@ -1,21 +1,17 @@
 import pandas as pd
 import logging
 import os
-import sys
 
 # Define root directory
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Create directories if they don't exist
-os.makedirs(os.path.join(ROOT_DIR, "logs"), exist_ok=True)  # For storing logs
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 # Set up logging
 logging.basicConfig(
-    level=logging.INFO,  # Log level (INFO, WARNING, ERROR)
-    format="%(asctime)s - %(levelname)s - %(message)s",  # Log format
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(os.path.join(ROOT_DIR, "logs", "loader.log")),  # Save logs to file
-        logging.StreamHandler(sys.stdout)  # Print logs to the notebook
+        logging.FileHandler(os.path.join(ROOT_DIR, "logs", "loader.log")),
+        logging.StreamHandler()
     ]
 )
 
@@ -32,7 +28,26 @@ def load_data(ticker):
     try:
         logging.info(f"Loading data for {ticker}...")
         file_path = os.path.join(ROOT_DIR, "data", f"{ticker}_data.csv")
-        data = pd.read_csv(file_path, index_col="Date", parse_dates=True)
+        
+        # Load the data, skipping the first 3 rows
+        data = pd.read_csv(file_path, skiprows=3)
+        
+        # Print the number of columns for debugging
+        print(f"Number of columns in {ticker}_data.csv: {len(data.columns)}")
+        
+        # Set the first column as the index and parse dates
+        data.set_index(data.columns[0], inplace=True)
+        data.index = pd.to_datetime(data.index)
+        
+        # Rename columns based on the number of columns
+        if len(data.columns) == 5:
+            data.columns = ["Price", "Close", "High", "Low", "Volume"]
+        elif len(data.columns) == 6:
+            data.columns = ["Price", "Close", "High", "Low", "Open", "Volume"]
+        else:
+            logging.error(f"Unexpected number of columns in {ticker}_data.csv: {len(data.columns)}")
+            return None
+        
         logging.info(f"Successfully loaded data for {ticker} from {file_path}.")
         return data
     except Exception as e:
