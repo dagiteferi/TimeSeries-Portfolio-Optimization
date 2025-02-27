@@ -31,23 +31,36 @@ def clean_and_understand_data(data, ticker):
     try:
         logging.info(f"Cleaning and analyzing data for {ticker}...")
 
-        # Check basic statistics
+        # Step 1: Check basic statistics
         logging.info(f"Basic statistics for {ticker}:")
         logging.info(data.describe())
 
-        # Check data types and missing values
-        logging.info(f"Data types and missing values for {ticker}:")
-        logging.info(data.info())
+        # Step 2: Ensure all columns have appropriate data types
+        logging.info(f"Data types before cleaning for {ticker}:")
+        logging.info(data.dtypes)
+
+        # Convert 'Date' column to datetime if it exists
+        if "Date" in data.columns:
+            data["Date"] = pd.to_datetime(data["Date"])
+            logging.info(f"'Date' column converted to datetime for {ticker}.")
+
+        # Step 3: Check for missing values
+        logging.info(f"Missing values before handling for {ticker}:")
+        logging.info(data.isnull().sum())
 
         # Handle missing values
         data.fillna(method="ffill", inplace=True)  # Forward fill missing values
         logging.info(f"Missing values after handling for {ticker}:")
         logging.info(data.isnull().sum())
 
-        # Normalize or scale the data
-        scaler = MinMaxScaler()
-        data["Close_Normalized"] = scaler.fit_transform(data[["Close"]])
-        logging.info(f"Data normalized for {ticker}.")
+        # Step 4: Normalize or scale the data (if required)
+        # Normalize the 'Close' column for machine learning models
+        if "Close" in data.columns:
+            scaler = MinMaxScaler()
+            data["Close_Normalized"] = scaler.fit_transform(data[["Close"]])
+            logging.info(f"'Close' column normalized for {ticker}.")
+        else:
+            logging.warning(f"'Close' column not found in data for {ticker}. Skipping normalization.")
 
         logging.info(f"Data cleaning and understanding completed for {ticker}.")
         return data
