@@ -1,6 +1,7 @@
 import pandas as pd
 import logging
 import os
+import sys
 
 # Define root directory
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -10,10 +11,12 @@ os.makedirs(os.path.join(ROOT_DIR, "logs"), exist_ok=True)  # For storing logs
 
 # Set up logging
 logging.basicConfig(
-    filename=os.path.join(ROOT_DIR, "logs", "loader.log"),  # Log file path
-    level=logging.INFO,             # Log level (INFO, WARNING, ERROR)
+    level=logging.INFO,  # Log level (INFO, WARNING, ERROR)
     format="%(asctime)s - %(levelname)s - %(message)s",  # Log format
-    filemode="w"                    # Overwrite the log file each time
+    handlers=[
+        logging.FileHandler(os.path.join(ROOT_DIR, "logs", "loader.log")),  # Save logs to file
+        logging.StreamHandler(sys.stdout)  # Print logs to the notebook
+    ]
 )
 
 def load_data(ticker):
@@ -35,17 +38,3 @@ def load_data(ticker):
     except Exception as e:
         logging.error(f"Error loading data for {ticker}: {e}")
         return None
-
-def main():
-    # Define the tickers to load
-    tickers = ["TSLA", "BND", "SPY"]
-
-    # Load data for each ticker
-    for ticker in tickers:
-        data = load_data(ticker)
-        if data is not None:
-            print(f"Data for {ticker} loaded successfully.")
-            print(data.head())  # Display the first few rows
-
-if __name__ == "__main__":
-    main()
