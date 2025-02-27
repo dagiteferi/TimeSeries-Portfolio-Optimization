@@ -1,11 +1,11 @@
-2025-02-27 15:10:34,427 - INFO - Loading data for BND...
-2025-02-27 15:10:34,487 - INFO - Successfully loaded data for BND from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
-2025-02-27 15:10:34,487 - INFO - Loading data for SPY...
-2025-02-27 15:10:34,530 - INFO - Successfully loaded data for SPY from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
-2025-02-27 15:10:34,530 - INFO - Loading data for TSLA...
-2025-02-27 15:10:34,564 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
-2025-02-27 15:10:34,617 - INFO - Basic statistics for TSLA:
-2025-02-27 15:10:34,634 - INFO -                                 Date        Price        Close         High  \
+2025-02-27 20:38:22,851 - INFO - Loading data for BND...
+2025-02-27 20:38:22,881 - INFO - Successfully loaded data for BND from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
+2025-02-27 20:38:22,882 - INFO - Loading data for SPY...
+2025-02-27 20:38:22,894 - INFO - Successfully loaded data for SPY from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
+2025-02-27 20:38:22,894 - INFO - Loading data for TSLA...
+2025-02-27 20:38:22,914 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-27 20:38:22,979 - INFO - Basic statistics for TSLA:
+2025-02-27 20:38:23,014 - INFO -                                 Date        Price        Close         High  \
 count                           2534  2534.000000  2534.000000  2534.000000   
 mean   2020-01-15 07:57:20.883977984   117.888946   120.516497   115.137325   
 min              2015-01-05 00:00:00     9.578000    10.331333     9.403333   
@@ -24,8 +24,8 @@ min       9.488000  1.062000e+07
 75%     222.661667  1.294490e+08  
 max     475.899994  9.140820e+08  
 std     116.616621  7.388527e+07  
-2025-02-27 15:10:34,649 - INFO - Basic statistics for BND:
-2025-02-27 15:10:34,656 - INFO -                                 Date        Price        Close         High  \
+2025-02-27 20:38:23,050 - INFO - Basic statistics for BND:
+2025-02-27 20:38:23,065 - INFO -                                 Date        Price        Close         High  \
 count                           2534  2534.000000  2534.000000  2534.000000   
 mean   2020-01-15 07:57:20.883977984    69.292102    69.393940    69.188691   
 min              2015-01-05 00:00:00    61.860874    61.937357    61.822635   
@@ -44,8 +44,8 @@ min      61.891469  0.000000e+00
 75%      72.846293  5.626950e+06  
 max      78.884958  3.193720e+07  
 std       4.792191  2.796348e+06  
-2025-02-27 15:10:34,671 - INFO - Basic statistics for SPY:
-2025-02-27 15:10:34,682 - INFO -                                 Date        Price        Close         High  \
+2025-02-27 20:38:23,089 - INFO - Basic statistics for SPY:
+2025-02-27 20:38:23,110 - INFO -                                 Date        Price        Close         High  \
 count                           2534  2534.000000  2534.000000  2534.000000   
 mean   2020-01-15 07:57:20.883977984   316.124021   317.782453   314.214169   
 min              2015-01-05 00:00:00   156.800842   157.864136   154.676868   
@@ -64,59 +64,59 @@ min     156.354943  2.027000e+07
 75%     406.109768  1.017314e+08  
 max     609.809998  5.072443e+08  
 std     117.910828  4.487621e+07  
-2025-02-27 15:10:34,705 - INFO - Data types before cleaning for TSLA:
-2025-02-27 15:10:34,706 - INFO - Date      datetime64[ns]
+2025-02-27 20:38:23,150 - INFO - Data types before cleaning for TSLA:
+2025-02-27 20:38:23,152 - INFO - Date      datetime64[ns]
 Price            float64
 Close            float64
 High             float64
 Low              float64
 Volume             int64
 dtype: object
-2025-02-27 15:10:34,711 - INFO - 'Date' column converted to datetime for TSLA.
-2025-02-27 15:10:34,711 - INFO - Data types after cleaning for TSLA:
-2025-02-27 15:10:34,711 - INFO - Date      datetime64[ns]
+2025-02-27 20:38:23,165 - INFO - 'Date' column converted to datetime for TSLA.
+2025-02-27 20:38:23,166 - INFO - Data types after cleaning for TSLA:
+2025-02-27 20:38:23,166 - INFO - Date      datetime64[ns]
 Price            float64
 Close            float64
 High             float64
 Low              float64
 Volume             int64
 dtype: object
-2025-02-27 15:10:34,712 - INFO - Data types before cleaning for BND:
-2025-02-27 15:10:34,712 - INFO - Date      datetime64[ns]
+2025-02-27 20:38:23,169 - INFO - Data types before cleaning for BND:
+2025-02-27 20:38:23,169 - INFO - Date      datetime64[ns]
 Price            float64
 Close            float64
 High             float64
 Low              float64
 Volume             int64
 dtype: object
-2025-02-27 15:10:34,769 - INFO - 'Date' column converted to datetime for BND.
-2025-02-27 15:10:34,769 - INFO - Data types after cleaning for BND:
-2025-02-27 15:10:34,769 - INFO - Date      datetime64[ns]
+2025-02-27 20:38:23,238 - INFO - 'Date' column converted to datetime for BND.
+2025-02-27 20:38:23,239 - INFO - Data types after cleaning for BND:
+2025-02-27 20:38:23,239 - INFO - Date      datetime64[ns]
 Price            float64
 Close            float64
 High             float64
 Low              float64
 Volume             int64
 dtype: object
-2025-02-27 15:10:34,770 - INFO - Data types before cleaning for SPY:
-2025-02-27 15:10:34,770 - INFO - Date      datetime64[ns]
+2025-02-27 20:38:23,240 - INFO - Data types before cleaning for SPY:
+2025-02-27 20:38:23,240 - INFO - Date      datetime64[ns]
 Price            float64
 Close            float64
 High             float64
 Low              float64
 Volume             int64
 dtype: object
-2025-02-27 15:10:34,772 - INFO - 'Date' column converted to datetime for SPY.
-2025-02-27 15:10:34,772 - INFO - Data types after cleaning for SPY:
-2025-02-27 15:10:34,772 - INFO - Date      datetime64[ns]
+2025-02-27 20:38:23,243 - INFO - 'Date' column converted to datetime for SPY.
+2025-02-27 20:38:23,243 - INFO - Data types after cleaning for SPY:
+2025-02-27 20:38:23,243 - INFO - Date      datetime64[ns]
 Price            float64
 Close            float64
 High             float64
 Low              float64
 Volume             int64
 dtype: object
-2025-02-27 15:10:34,781 - INFO - Basic statistics for TSLA:
-2025-02-27 15:10:34,793 - INFO -                                 Date        Price        Close         High  \
+2025-02-27 20:38:23,256 - INFO - Basic statistics for TSLA:
+2025-02-27 20:38:23,276 - INFO -                                 Date        Price        Close         High  \
 count                           2534  2534.000000  2534.000000  2534.000000   
 mean   2020-01-15 07:57:20.883977984   117.888946   120.516497   115.137325   
 min              2015-01-05 00:00:00     9.578000    10.331333     9.403333   
@@ -135,90 +135,81 @@ min       9.488000  1.062000e+07
 75%     222.661667  1.294490e+08  
 max     475.899994  9.140820e+08  
 std     116.616621  7.388527e+07  
-2025-02-27 15:10:34,805 - INFO - Missing values for TSLA:
-2025-02-27 15:10:34,805 - INFO - Date      0
+2025-02-27 20:38:23,296 - INFO - Missing values for TSLA:
+2025-02-27 20:38:23,297 - INFO - Date      0
 Price     0
 Close     0
 High      0
 Low       0
 Volume    0
 dtype: int64
-2025-02-27 15:10:34,806 - INFO - Missing values for BND:
-2025-02-27 15:10:34,807 - INFO - Date      0
+2025-02-27 20:38:23,298 - INFO - Missing values for BND:
+2025-02-27 20:38:23,299 - INFO - Date      0
 Price     0
 Close     0
 High      0
 Low       0
 Volume    0
 dtype: int64
-2025-02-27 15:10:34,808 - INFO - Missing values for spy:
-2025-02-27 15:10:34,808 - INFO - Date      0
+2025-02-27 20:38:23,301 - INFO - Missing values for spy:
+2025-02-27 20:38:23,303 - INFO - Date      0
 Price     0
 Close     0
 High      0
 Low       0
 Volume    0
 dtype: int64
-2025-02-27 15:10:34,820 - INFO - Visualizing closing price for TSLA...
-2025-02-27 15:10:35,130 - INFO - Closing price visualization completed for TSLA.
-2025-02-27 15:10:35,131 - INFO - Calculating daily returns for TSLA...
-2025-02-27 15:10:35,263 - INFO - Daily returns calculation and visualization completed for TSLA.
-2025-02-27 15:10:35,263 - INFO - Analyzing volatility for TSLA with a 30-day rolling window...
-2025-02-27 15:10:35,266 - INFO - Plotting rolling statistics for TSLA...
-2025-02-27 15:10:35,439 - INFO - Volatility analysis completed for TSLA.
-2025-02-27 15:10:35,439 - INFO - Detecting outliers for TSLA using Z-score method...
-2025-02-27 15:10:35,596 - INFO - Outlier detection completed for TSLA.
-2025-02-27 15:10:35,596 - INFO - Analyzing extreme returns for TSLA...
-2025-02-27 15:10:35,786 - INFO - Extreme returns analysis completed for TSLA.
-2025-02-27 15:10:35,798 - INFO - Visualizing closing price for BND...
-2025-02-27 15:10:35,949 - INFO - Closing price visualization completed for BND.
-2025-02-27 15:10:35,949 - INFO - Calculating daily returns for BND...
-2025-02-27 15:10:36,081 - INFO - Daily returns calculation and visualization completed for BND.
-2025-02-27 15:10:36,081 - INFO - Analyzing volatility for BND with a 30-day rolling window...
-2025-02-27 15:10:36,083 - INFO - Plotting rolling statistics for BND...
-2025-02-27 15:10:36,244 - INFO - Volatility analysis completed for BND.
-2025-02-27 15:10:36,245 - INFO - Detecting outliers for BND using Z-score method...
-2025-02-27 15:10:36,400 - INFO - Outlier detection completed for BND.
-2025-02-27 15:10:36,400 - INFO - Analyzing extreme returns for BND...
-2025-02-27 15:10:36,572 - INFO - Extreme returns analysis completed for BND.
-2025-02-27 15:10:36,583 - INFO - Visualizing closing price for SPY...
-2025-02-27 15:10:36,718 - INFO - Closing price visualization completed for SPY.
-2025-02-27 15:10:36,718 - INFO - Calculating daily returns for SPY...
-2025-02-27 15:10:36,863 - INFO - Daily returns calculation and visualization completed for SPY.
-2025-02-27 15:10:36,863 - INFO - Analyzing volatility for SPY with a 30-day rolling window...
-2025-02-27 15:10:36,865 - INFO - Plotting rolling statistics for SPY...
-2025-02-27 15:10:37,016 - INFO - Volatility analysis completed for SPY.
-2025-02-27 15:10:37,016 - INFO - Detecting outliers for SPY using Z-score method...
-2025-02-27 15:10:37,160 - INFO - Outlier detection completed for SPY.
-2025-02-27 15:10:37,161 - INFO - Analyzing extreme returns for SPY...
-2025-02-27 15:10:37,351 - INFO - Extreme returns analysis completed for SPY.
-2025-02-27 15:10:37,362 - INFO - Starting time series decomposition for TSLA...
-2025-02-27 15:10:37,362 - INFO - Performing seasonal decomposition for TSLA with period=252...
-2025-02-27 15:10:37,368 - INFO - Plotting decomposition results for TSLA...
-2025-02-27 15:10:37,778 - INFO - Time series decomposition completed for TSLA.
-2025-02-27 15:10:37,778 - INFO - Starting time series decomposition for BND...
-2025-02-27 15:10:37,778 - INFO - Performing seasonal decomposition for BND with period=252...
-2025-02-27 15:10:37,784 - INFO - Plotting decomposition results for BND...
-2025-02-27 15:10:38,239 - INFO - Time series decomposition completed for BND.
-2025-02-27 15:10:38,239 - INFO - Starting time series decomposition for SPY...
-2025-02-27 15:10:38,239 - INFO - Performing seasonal decomposition for SPY with period=252...
-2025-02-27 15:10:38,247 - INFO - Plotting decomposition results for SPY...
-2025-02-27 15:10:38,650 - INFO - Time series decomposition completed for SPY.
-2025-02-27 15:10:38,662 - INFO - Analyzing volatility for TSLA with a 30-day rolling window...
-2025-02-27 15:10:38,664 - INFO - Plotting rolling statistics for TSLA...
-2025-02-27 15:10:38,820 - INFO - Volatility analysis completed for TSLA.
-2025-02-27 15:10:38,820 - INFO - Analyzing volatility for BND with a 30-day rolling window...
-2025-02-27 15:10:38,821 - INFO - Plotting rolling statistics for BND...
-2025-02-27 15:10:38,981 - INFO - Volatility analysis completed for BND.
-2025-02-27 15:10:38,981 - INFO - Analyzing volatility for SPY with a 30-day rolling window...
-2025-02-27 15:10:38,982 - INFO - Plotting rolling statistics for SPY...
-2025-02-27 15:10:39,193 - INFO - Volatility analysis completed for SPY.
-2025-02-27 15:10:39,212 - INFO - Analyzing volatility for TSLA with a 30-day rolling window...
-2025-02-27 15:10:39,214 - INFO - Plotting rolling statistics for TSLA...
-2025-02-27 15:10:39,384 - INFO - Volatility analysis completed for TSLA.
-2025-02-27 15:10:39,385 - INFO - Analyzing volatility for BND with a 30-day rolling window...
-2025-02-27 15:10:39,386 - INFO - Plotting rolling statistics for BND...
-2025-02-27 15:10:39,583 - INFO - Volatility analysis completed for BND.
-2025-02-27 15:10:39,584 - INFO - Analyzing volatility for SPY with a 30-day rolling window...
-2025-02-27 15:10:39,585 - INFO - Plotting rolling statistics for SPY...
-2025-02-27 15:10:39,769 - INFO - Volatility analysis completed for SPY.
+2025-02-27 20:38:23,316 - INFO - Visualizing closing price for TSLA...
+2025-02-27 20:38:23,550 - INFO - Closing price visualization completed for TSLA.
+2025-02-27 20:38:23,551 - INFO - Calculating daily returns for TSLA...
+2025-02-27 20:38:23,742 - INFO - Daily returns calculation and visualization completed for TSLA.
+2025-02-27 20:38:23,742 - INFO - Analyzing volatility for TSLA with a 30-day rolling window...
+2025-02-27 20:38:23,749 - INFO - Plotting rolling statistics for TSLA...
+2025-02-27 20:38:24,005 - INFO - Volatility analysis completed for TSLA.
+2025-02-27 20:38:24,005 - INFO - Detecting outliers for TSLA using Z-score method...
+2025-02-27 20:38:24,238 - INFO - Outlier detection completed for TSLA.
+2025-02-27 20:38:24,238 - INFO - Analyzing extreme returns for TSLA...
+2025-02-27 20:38:24,517 - INFO - Extreme returns analysis completed for TSLA.
+2025-02-27 20:38:24,534 - INFO - Visualizing closing price for BND...
+2025-02-27 20:38:24,773 - INFO - Closing price visualization completed for BND.
+2025-02-27 20:38:24,773 - INFO - Calculating daily returns for BND...
+2025-02-27 20:38:24,971 - INFO - Daily returns calculation and visualization completed for BND.
+2025-02-27 20:38:24,971 - INFO - Analyzing volatility for BND with a 30-day rolling window...
+2025-02-27 20:38:24,974 - INFO - Plotting rolling statistics for BND...
+2025-02-27 20:38:25,190 - INFO - Volatility analysis completed for BND.
+2025-02-27 20:38:25,190 - INFO - Detecting outliers for BND using Z-score method...
+2025-02-27 20:38:25,445 - INFO - Outlier detection completed for BND.
+2025-02-27 20:38:25,446 - INFO - Analyzing extreme returns for BND...
+2025-02-27 20:38:25,726 - INFO - Extreme returns analysis completed for BND.
+2025-02-27 20:38:25,742 - INFO - Visualizing closing price for SPY...
+2025-02-27 20:38:26,038 - INFO - Closing price visualization completed for SPY.
+2025-02-27 20:38:26,038 - INFO - Calculating daily returns for SPY...
+2025-02-27 20:38:26,261 - INFO - Daily returns calculation and visualization completed for SPY.
+2025-02-27 20:38:26,261 - INFO - Analyzing volatility for SPY with a 30-day rolling window...
+2025-02-27 20:38:26,263 - INFO - Plotting rolling statistics for SPY...
+2025-02-27 20:38:26,521 - INFO - Volatility analysis completed for SPY.
+2025-02-27 20:38:26,522 - INFO - Detecting outliers for SPY using Z-score method...
+2025-02-27 20:38:26,760 - INFO - Outlier detection completed for SPY.
+2025-02-27 20:38:26,760 - INFO - Analyzing extreme returns for SPY...
+2025-02-27 20:38:27,076 - INFO - Extreme returns analysis completed for SPY.
+2025-02-27 20:38:27,093 - INFO - Starting time series decomposition for TSLA...
+2025-02-27 20:38:27,093 - INFO - Performing seasonal decomposition for TSLA with period=252...
+2025-02-27 20:38:27,108 - INFO - Plotting decomposition results for TSLA...
+2025-02-27 20:38:27,748 - INFO - Time series decomposition completed for TSLA.
+2025-02-27 20:38:27,749 - INFO - Starting time series decomposition for BND...
+2025-02-27 20:38:27,749 - INFO - Performing seasonal decomposition for BND with period=252...
+2025-02-27 20:38:27,759 - INFO - Plotting decomposition results for BND...
+2025-02-27 20:38:28,539 - INFO - Time series decomposition completed for BND.
+2025-02-27 20:38:28,540 - INFO - Starting time series decomposition for SPY...
+2025-02-27 20:38:28,540 - INFO - Performing seasonal decomposition for SPY with period=252...
+2025-02-27 20:38:28,547 - INFO - Plotting decomposition results for SPY...
+2025-02-27 20:38:29,122 - INFO - Time series decomposition completed for SPY.
+2025-02-27 20:38:29,138 - INFO - Analyzing volatility for TSLA with a 30-day rolling window...
+2025-02-27 20:38:29,142 - INFO - Plotting rolling statistics for TSLA...
+2025-02-27 20:38:29,419 - INFO - Volatility analysis completed for TSLA.
+2025-02-27 20:38:29,419 - INFO - Analyzing volatility for BND with a 30-day rolling window...
+2025-02-27 20:38:29,422 - INFO - Plotting rolling statistics for BND...
+2025-02-27 20:38:29,658 - INFO - Volatility analysis completed for BND.
+2025-02-27 20:38:29,659 - INFO - Analyzing volatility for SPY with a 30-day rolling window...
+2025-02-27 20:38:29,661 - INFO - Plotting rolling statistics for SPY...
+2025-02-27 20:38:29,883 - INFO - Volatility analysis completed for SPY.
