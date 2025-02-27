@@ -1,12 +1,9 @@
-2025-02-26 20:51:42,701 - INFO - Fetching data for TSLA...
-2025-02-26 20:52:13,405 - ERROR - 
-1 Failed download:
-2025-02-26 20:52:13,406 - ERROR - ['TSLA']: ReadTimeout(ReadTimeoutError("HTTPSConnectionPool(host='query1.finance.yahoo.com', port=443): Read timed out. (read timeout=30)"))
-2025-02-26 20:52:14,003 - INFO - Successfully fetched data for TSLA.
-2025-02-26 20:52:14,128 - INFO - Data for TSLA saved to C:\Users\Dagi\Documents\KAIM\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
-2025-02-26 20:52:14,129 - INFO - Fetching data for BND...
-2025-02-26 20:52:18,403 - INFO - Successfully fetched data for BND.
-2025-02-26 20:52:18,527 - INFO - Data for BND saved to C:\Users\Dagi\Documents\KAIM\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
-2025-02-26 20:52:18,527 - INFO - Fetching data for SPY...
-2025-02-26 20:52:19,470 - INFO - Successfully fetched data for SPY.
-2025-02-26 20:52:19,571 - INFO - Data for SPY saved to C:\Users\Dagi\Documents\KAIM\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
+2025-02-26 20:54:48,148 - INFO - Fetching data for TSLA...
+2025-02-26 20:54:49,779 - INFO - Successfully fetched data for TSLA.
+2025-02-26 20:54:49,838 - INFO - Data for TSLA saved to C:\Users\Dagi\Documents\KAIM\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-26 20:54:49,839 - INFO - Fetching data for BND...
+2025-02-26 20:54:50,515 - INFO - Successfully fetched data for BND.
+2025-02-26 20:54:50,658 - INFO - Data for BND saved to C:\Users\Dagi\Documents\KAIM\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
+2025-02-26 20:54:50,658 - INFO - Fetching data for SPY...
+2025-02-26 20:54:51,357 - INFO - Successfully fetched data for SPY.
+2025-02-26 20:54:51,433 - INFO - Data for SPY saved to C:\Users\Dagi\Documents\KAIM\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
