@@ -3,6 +3,10 @@ import pandas as pd
 import logging
 import os
 
+# Create directories if they don't exist
+os.makedirs("data", exist_ok=True)  # For storing data
+os.makedirs("logs", exist_ok=True)  # For storing logs
+
 # Set up logging
 logging.basicConfig(
     filename="logs/fetch_data.log",  # Log file path
@@ -10,10 +14,6 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",  # Log format
     filemode="w"                    # Overwrite the log file each time
 )
-
-# Create directories if they don't exist
-os.makedirs("data", exist_ok=True)  # For storing data
-os.makedirs("logs", exist_ok=True)  # For storing logs
 
 def fetch_asset_data(ticker, start_date, end_date):
     """
