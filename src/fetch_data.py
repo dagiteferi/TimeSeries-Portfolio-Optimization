@@ -3,13 +3,16 @@ import pandas as pd
 import logging
 import os
 
+# Define root directory
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # Create directories if they don't exist
-os.makedirs("data", exist_ok=True)  # For storing data
-os.makedirs("logs", exist_ok=True)  # For storing logs
+os.makedirs(os.path.join(ROOT_DIR, "data"), exist_ok=True)  # For storing data
+os.makedirs(os.path.join(ROOT_DIR, "logs"), exist_ok=True)  # For storing logs
 
 # Set up logging
 logging.basicConfig(
-    filename="logs/fetch_data.log",  # Log file path
+    filename=os.path.join(ROOT_DIR, "logs", "fetch_data.log"),  # Log file path
     level=logging.INFO,             # Log level (INFO, WARNING, ERROR)
     format="%(asctime)s - %(levelname)s - %(message)s",  # Log format
     filemode="w"                    # Overwrite the log file each time
@@ -45,7 +48,7 @@ def save_data(data, ticker):
         ticker (str): The ticker symbol (e.g., "TSLA").
     """
     try:
-        file_path = f"data/{ticker}_data.csv"
+        file_path = os.path.join(ROOT_DIR, "data", f"{ticker}_data.csv")
         data.to_csv(file_path)
         logging.info(f"Data for {ticker} saved to {file_path}.")
     except Exception as e:
