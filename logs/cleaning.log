@@ -1,11 +1,11 @@
-2025-02-28 09:37:21,974 - INFO - Loading data for BND...
-2025-02-28 09:37:22,001 - INFO - Successfully loaded data for BND from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
-2025-02-28 09:37:22,001 - INFO - Loading data for SPY...
-2025-02-28 09:37:22,019 - INFO - Successfully loaded data for SPY from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
-2025-02-28 09:37:22,019 - INFO - Loading data for TSLA...
-2025-02-28 09:37:22,037 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
-2025-02-28 09:37:26,409 - INFO - Basic statistics for TSLA:
-2025-02-28 09:37:26,425 - INFO -                                 Date        Price        Close         High  \
+2025-02-28 09:41:51,070 - INFO - Loading data for BND...
+2025-02-28 09:41:51,096 - INFO - Successfully loaded data for BND from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
+2025-02-28 09:41:51,098 - INFO - Loading data for SPY...
+2025-02-28 09:41:51,114 - INFO - Successfully loaded data for SPY from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
+2025-02-28 09:41:51,114 - INFO - Loading data for TSLA...
+2025-02-28 09:41:51,127 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-28 09:41:54,108 - INFO - Basic statistics for TSLA:
+2025-02-28 09:41:54,125 - INFO -                                 Date        Price        Close         High  \
 count                           2534  2534.000000  2534.000000  2534.000000   
 mean   2020-01-15 07:57:20.883977984   117.888946   120.516497   115.137325   
 min              2015-01-05 00:00:00     9.578000    10.331333     9.403333   
@@ -24,8 +24,8 @@ min       9.488000  1.062000e+07
 75%     222.661667  1.294490e+08  
 max     475.899994  9.140820e+08  
 std     116.616621  7.388527e+07  
-2025-02-28 09:37:26,454 - INFO - Basic statistics for BND:
-2025-02-28 09:37:26,467 - INFO -                                 Date        Price        Close         High  \
+2025-02-28 09:41:54,154 - INFO - Basic statistics for BND:
+2025-02-28 09:41:54,170 - INFO -                                 Date        Price        Close         High  \
 count                           2534  2534.000000  2534.000000  2534.000000   
 mean   2020-01-15 07:57:20.883977984    69.292102    69.393940    69.188691   
 min              2015-01-05 00:00:00    61.860874    61.937357    61.822635   
@@ -44,8 +44,8 @@ min      61.891469  0.000000e+00
 75%      72.846293  5.626950e+06  
 max      78.884958  3.193720e+07  
 std       4.792191  2.796348e+06  
-2025-02-28 09:37:26,487 - INFO - Basic statistics for SPY:
-2025-02-28 09:37:26,500 - INFO -                                 Date        Price        Close         High  \
+2025-02-28 09:41:54,185 - INFO - Basic statistics for SPY:
+2025-02-28 09:41:54,197 - INFO -                                 Date        Price        Close         High  \
 count                           2534  2534.000000  2534.000000  2534.000000   
 mean   2020-01-15 07:57:20.883977984   316.124021   317.782453   314.214169   
 min              2015-01-05 00:00:00   156.800842   157.864136   154.676868   
@@ -64,14 +64,14 @@ min     156.354943  2.027000e+07
 75%     406.109768  1.017314e+08  
 max     609.809998  5.072443e+08  
 std     117.910828  4.487621e+07  
-2025-02-28 09:37:35,822 - INFO - Preprocessing data: converting 'Date' column to datetime and setting it as index...
-2025-02-28 09:37:35,827 - INFO - Data preprocessing completed successfully.
-2025-02-28 09:37:35,828 - INFO - Preprocessing data: converting 'Date' column to datetime and setting it as index...
-2025-02-28 09:37:35,898 - INFO - Data preprocessing completed successfully.
-2025-02-28 09:37:35,898 - INFO - Preprocessing data: converting 'Date' column to datetime and setting it as index...
-2025-02-28 09:37:35,901 - INFO - Data preprocessing completed successfully.
-2025-02-28 09:37:39,163 - INFO - Basic statistics for TSLA:
-2025-02-28 09:37:39,174 - INFO -              Price        Close         High          Low        Volume
+2025-02-28 09:41:58,862 - INFO - Preprocessing data: converting 'Date' column to datetime and setting it as index...
+2025-02-28 09:41:58,867 - INFO - Data preprocessing completed successfully.
+2025-02-28 09:41:58,867 - INFO - Preprocessing data: converting 'Date' column to datetime and setting it as index...
+2025-02-28 09:41:58,943 - INFO - Data preprocessing completed successfully.
+2025-02-28 09:41:58,943 - INFO - Preprocessing data: converting 'Date' column to datetime and setting it as index...
+2025-02-28 09:41:58,949 - INFO - Data preprocessing completed successfully.
+2025-02-28 09:42:00,703 - INFO - Basic statistics for TSLA:
+2025-02-28 09:42:00,717 - INFO -              Price        Close         High          Low        Volume
 count  2534.000000  2534.000000  2534.000000  2534.000000  2.534000e+03
 mean    117.888946   120.516497   115.137325   117.918317  1.120468e+08
 std     116.513225   119.241096   113.703698   116.616621  7.388527e+07
@@ -80,46 +80,35 @@ min       9.578000    10.331333     9.403333     9.488000  1.062000e+07
 50%      30.784333    32.640001    29.992001    31.440000  9.264390e+07
 75%     221.622501   226.718338   217.090828   222.661667  1.294490e+08
 max     479.859985   488.540009   457.510010   475.899994  9.140820e+08
-2025-02-28 09:37:39,190 - INFO - Missing values for TSLA:
-2025-02-28 09:37:39,191 - INFO - Price     0
+2025-02-28 09:42:00,734 - INFO - Missing values for TSLA:
+2025-02-28 09:42:00,734 - INFO - Price     0
 Close     0
 High      0
 Low       0
 Volume    0
 dtype: int64
-2025-02-28 09:37:39,193 - INFO - Missing values for BND:
-2025-02-28 09:37:39,193 - INFO - Price     0
+2025-02-28 09:42:00,737 - INFO - Missing values for BND:
+2025-02-28 09:42:00,738 - INFO - Price     0
 Close     0
 High      0
 Low       0
 Volume    0
 dtype: int64
-2025-02-28 09:37:39,196 - INFO - Missing values for spy:
-2025-02-28 09:37:39,197 - INFO - Price     0
+2025-02-28 09:42:00,740 - INFO - Missing values for spy:
+2025-02-28 09:42:00,740 - INFO - Price     0
 Close     0
 High      0
 Low       0
 Volume    0
 dtype: int64
-2025-02-28 09:37:49,813 - INFO - Visualizing closing price for TSLA...
-2025-02-28 09:37:50,027 - INFO - Closing price visualization completed for TSLA.
-2025-02-28 09:37:50,028 - INFO - Calculating daily returns for TSLA...
-2025-02-28 09:37:50,242 - INFO - Daily returns calculation and visualization completed for TSLA.
-2025-02-28 09:37:50,242 - INFO - Analyzing volatility for TSLA with a 30-day rolling window...
-2025-02-28 09:37:50,245 - INFO - Plotting rolling statistics for TSLA...
-2025-02-28 09:37:50,559 - INFO - Volatility analysis completed for TSLA.
-2025-02-28 09:37:50,559 - INFO - Detecting outliers for TSLA using Z-score method...
-2025-02-28 09:37:50,819 - INFO - Outlier detection completed for TSLA.
-2025-02-28 09:37:50,820 - INFO - Analyzing extreme returns for TSLA...
-2025-02-28 09:37:51,155 - INFO - Extreme returns analysis completed for TSLA.
-2025-02-28 09:39:07,682 - INFO - Visualizing closing price for BND...
-2025-02-28 09:39:07,901 - INFO - Closing price visualization completed for BND.
-2025-02-28 09:39:07,901 - INFO - Calculating daily returns for BND...
-2025-02-28 09:39:08,146 - INFO - Daily returns calculation and visualization completed for BND.
-2025-02-28 09:39:08,146 - INFO - Analyzing volatility for BND with a 30-day rolling window...
-2025-02-28 09:39:08,149 - INFO - Plotting rolling statistics for BND...
-2025-02-28 09:39:08,453 - INFO - Volatility analysis completed for BND.
-2025-02-28 09:39:08,453 - INFO - Detecting outliers for BND using Z-score method...
-2025-02-28 09:39:08,660 - INFO - Outlier detection completed for BND.
-2025-02-28 09:39:08,660 - INFO - Analyzing extreme returns for BND...
-2025-02-28 09:39:08,887 - INFO - Extreme returns analysis completed for BND.
+2025-02-28 09:42:03,954 - INFO - Visualizing closing price for TSLA...
+2025-02-28 09:42:04,237 - INFO - Closing price visualization completed for TSLA.
+2025-02-28 09:42:04,238 - INFO - Calculating daily returns for TSLA...
+2025-02-28 09:42:04,563 - INFO - Daily returns calculation and visualization completed for TSLA.
+2025-02-28 09:42:04,564 - INFO - Analyzing volatility for TSLA with a 30-day rolling window...
+2025-02-28 09:42:04,571 - INFO - Plotting rolling statistics for TSLA...
+2025-02-28 09:42:04,866 - INFO - Volatility analysis completed for TSLA.
+2025-02-28 09:42:04,866 - INFO - Detecting outliers for TSLA using Z-score method...
+2025-02-28 09:42:05,128 - INFO - Outlier detection completed for TSLA.
+2025-02-28 09:42:05,128 - INFO - Analyzing extreme returns for TSLA...
+2025-02-28 09:42:05,423 - INFO - Extreme returns analysis completed for TSLA.
