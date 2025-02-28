@@ -56,3 +56,45 @@ def analyze_volatility(data, ticker, window=30):
     except Exception as e:
         logging.error(f"Error analyzing volatility for {ticker}: {e}")
         return None
+def calculate_var_sharpe(data, ticker, confidence_level=0.95, rf_rate=0.02):
+    """
+    Calculate Value at Risk (VaR) and Sharpe Ratio for a given asset.
+    
+    Parameters:
+        data (pd.DataFrame): The dataset with a 'Close' column and Date as index.
+        ticker (str): The ticker symbol (e.g., "TSLA").
+        confidence_level (float): Confidence level for VaR (default 0.95).
+        rf_rate (float): Risk-free rate (default 0.02 or 2%).
+    
+    Returns:
+        tuple: (VaR as percentage, Sharpe Ratio as float) or (None, None) if error occurs
+    """
+    try:
+        logging.info(f"Calculating VaR and Sharpe Ratio for {ticker}...")
+        
+        # Ensure data has a 'Close' column and is a DataFrame
+        if not isinstance(data, pd.DataFrame) or "Close" not in data.columns:
+            raise ValueError(f"Data must be a DataFrame with a 'Close' column for {ticker}")
+        
+        # Calculate daily returns
+        daily_returns = data["Close"].pct_change().dropna()
+        if daily_returns.empty:
+            raise ValueError(f"No valid daily returns calculated for {ticker}")
+        
+        # Calculate VaR (historical, percentile method)
+        var = np.percentile(daily_returns, (1 - confidence_level) * 100) * 100  # Convert to percentage
+        logging.info(f"VaR at {confidence_level*100}% confidence for {ticker}: {var:.2f}%")
+        
+        # Calculate Sharpe Ratio (annualized)
+        mean_return = daily_returns.mean() * 252  # Annualize daily mean return
+        std_return = daily_returns.std() * np.sqrt(252)  # Annualize daily standard deviation
+        if std_return == 0:  # Avoid division by zero
+            sharpe = 0
+        else:
+            sharpe = (mean_return - rf_rate) / std_return
+        logging.info(f"Sharpe Ratio for {ticker}: {sharpe:.2f}")
+        
+        return var, sharpe
+    except Exception as e:
+        logging.error(f"Error calculating VaR and Sharpe Ratio for {ticker}: {e}")
+        return None, None
