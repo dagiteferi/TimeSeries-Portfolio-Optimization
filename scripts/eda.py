@@ -25,7 +25,7 @@ def preprocess_data(data):
     """
     try:
         logging.info("Preprocessing data: converting 'Date' column to datetime and setting it as index...")
-        data["Date"] = pd.to_datetime(data["Date"])  # Convert Date column to datetime format
+        data["Date"] = pd.to_datetime(data["Date"], format='%Y-%m-%d')  # Specify the correct format
         data.set_index("Date", inplace=True)         # Set Date column as index
         logging.info("Data preprocessing completed successfully.")
     except Exception as e:
@@ -43,6 +43,10 @@ def visualize_closing_price(data, ticker):
         plt.ylabel("Closing Price")
         plt.legend()
         plt.grid()
+        
+        # Set the x-axis limits to the correct date range
+        plt.xlim([pd.to_datetime('2015-01-01'), pd.to_datetime('2025-12-31')])
+        
         plt.show()
         logging.info(f"Closing price visualization completed for {ticker}.")
     except Exception as e:
@@ -60,6 +64,10 @@ def calculate_daily_returns(data, ticker):
         plt.ylabel("Daily Return (%)")
         plt.legend()
         plt.grid()
+        
+        # Set the x-axis limits to the correct date range
+        plt.xlim([pd.to_datetime('2015-01-01'), pd.to_datetime('2025-12-31')])
+        
         plt.show()
         logging.info(f"Daily returns calculation and visualization completed for {ticker}.")
     except Exception as e:
@@ -80,6 +88,10 @@ def analyze_volatility(data, ticker, window=30):
         plt.ylabel("Price")
         plt.legend()
         plt.grid()
+        
+        # Set the x-axis limits to the correct date range
+        plt.xlim([pd.to_datetime('2015-01-01'), pd.to_datetime('2025-12-31')])
+        
         plt.show()
         logging.info(f"Volatility analysis completed for {ticker}.")
     except Exception as e:
@@ -99,6 +111,10 @@ def detect_outliers(data, ticker, column="Close", threshold=3):
         plt.ylabel(column)
         plt.legend()
         plt.grid()
+        
+        # Set the x-axis limits to the correct date range
+        plt.xlim([pd.to_datetime('2015-01-01'), pd.to_datetime('2025-12-31')])
+        
         plt.show()
         logging.info(f"Outlier detection completed for {ticker}.")
     except Exception as e:
@@ -119,6 +135,10 @@ def analyze_extreme_returns(data, ticker, threshold=2):
         plt.ylabel("Daily Return (%)")
         plt.legend()
         plt.grid()
+        
+        # Set the x-axis limits to the correct date range
+        plt.xlim([pd.to_datetime('2015-01-01'), pd.to_datetime('2025-12-31')])
+        
         plt.show()
         logging.info(f"Extreme returns analysis completed for {ticker}.")
     except Exception as e:
