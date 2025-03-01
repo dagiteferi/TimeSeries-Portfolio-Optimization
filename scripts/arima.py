@@ -1,160 +1,101 @@
 import pandas as pd
 import numpy as np
-import logging
-from pmdarima import auto_arima
 from statsmodels.tsa.arima.model import ARIMA
+from pmdarima import auto_arima
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[
-        logging.FileHandler("arima_forecast.log"),
-        logging.StreamHandler()
-    ]
-)
+import pandas as pd
+import numpy as np
+from statsmodels.tsa.arima.model import ARIMA
+from pmdarima import auto_arima
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+import matplotlib.pyplot as plt
 
 def train_arima(data, train_size=None, train_end='2024-12-31'):
     """
-    Train and optimize an ARIMA model using auto_arima for parameter selection.
-    
-    Parameters:
-        data (pd.DataFrame): Time series data with DateTime index and 'Close' column
-        train_size (int, optional): Number of samples for training. Default uses date split
-        train_end (str): Cutoff date for training data (format: 'YYYY-MM-DD')
-    
-    Returns:
-        tuple: (fitted ARIMA model, (p, d, q) order tuple)
-    
-    Raises:
-        ValueError: If input data is invalid or training fails
-    """
-    try:
-        logging.info("🔧 Starting ARIMA model training...")
-        
-        # Split data based on date or sample size
-        if train_size is None:
-            train_data = data[data.index < train_end]['Close']
-            logging.info(f"📅 Using date-based split. Training data up to {train_end}")
-        else:
-            train_data = data[:train_size]['Close']
-            logging.info(f"📏 Using sample-based split. Training on first {train_size} samples")
+    Train an ARIMA model on TSLA Close price, optimizing parameters with auto_arima.
 
-        # Automatically find optimal ARIMA parameters
-        logging.info("🔄 Running auto_arima for parameter optimization...")
-        arima_model = auto_arima(
-            train_data,
-            seasonal=False,
-            start_p=1, start_q=1,
-            max_p=3, max_q=3,
-            d=None,
-            trace=True,
-            error_action='ignore',
-            suppress_warnings=True
-        )
-        
-        logging.info(f"✅ ARIMA model trained successfully. Optimal order: {arima_model.order}")
-        return arima_model, arima_model.order
-        
-    except Exception as e:
-        logging.error(f"❌ ARIMA training failed: {str(e)}")
-        raise ValueError(f"ARIMA training error: {str(e)}")
+    Parameters:
+        data (pd.DataFrame): TSLA data with 'Close' column and Date index.
+        train_size (int, optional): Number of training rows. Defaults to date-based split.
+        train_end (str, optional): End date for training (default '2024-12-31').
+
+    Returns:
+        tuple: (fitted ARIMA model, optimal parameters as (p, d, q) tuple)
+    """
+    # Split data for training
+    if train_size is None:
+        train_data = data[data.index < train_end]['Close']
+    else:
+        train_data = data[:train_size]['Close']
+
+    # Use auto_arima to find optimal parameters (model is already fitted)
+    arima_model = auto_arima(
+        train_data, 
+        seasonal=False, 
+        start_p=1, start_q=1, 
+        max_p=3, max_q=3, 
+        d=None, 
+        trace=True, 
+        error_action='ignore', 
+        suppress_warnings=True
+    )
+    
+    # Return the fitted model and its order
+    return arima_model, arima_model.order
 
 def forecast_arima(model, steps, start_date):
     """
-    Generate future forecasts with date alignment using trained ARIMA model.
-    
+    Forecast future TSLA Close prices using a trained ARIMA model and assign dates.
+
     Parameters:
-        model: Trained pmdarima ARIMA model
-        steps (int): Number of periods to forecast
-        start_date (str): First date of forecast period ('YYYY-MM-DD')
-    
+        model: Fitted ARIMA model from pmdarima.
+        steps (int): Number of steps to forecast.
+        start_date (str): Start date for the forecast (e.g., '2025-01-01').
+
     Returns:
-        pd.Series: Forecasted values with DateTime index
-    
-    Raises:
-        ValueError: If forecasting fails due to invalid inputs
+        pd.Series: Forecasted Close prices with Date index.
     """
     try:
-        logging.info(f"🔮 Generating {steps}-step forecast starting from {start_date}...")
-        
-        # Generate predictions and create date index
         forecast = model.predict(n_periods=steps)
+        # Generate date index for the forecast
         dates = pd.date_range(start=start_date, periods=steps)
-        forecast_series = pd.Series(forecast, index=dates)
-        
-        logging.info("✨ Forecast generated successfully")
-        return forecast_series
-        
+        return pd.Series(forecast, index=dates)
     except Exception as e:
-        logging.error(f"❌ Forecasting failed: {str(e)}")
-        raise ValueError(f"Forecasting error: {str(e)}")
+        raise ValueError(f"Error forecasting with ARIMA: {str(e)}")
+
+
 
 def evaluate_arima(actual, forecast):
     """
-    Calculate performance metrics between actual and forecasted values.
-    
+    Evaluate ARIMA performance with MAE, RMSE, and MAPE.
+
     Parameters:
-        actual (pd.Series): Ground truth values with DateTime index
-        forecast (pd.Series): Predicted values with DateTime index
-    
+        actual (pd.Series): Actual Close prices with Date index.
+        forecast (np.ndarray): Forecasted Close prices.
+
     Returns:
-        tuple: (MAE, RMSE, MAPE) metrics
-    
-    Raises:
-        ValueError: If input series don't align temporally
-    """
-    try:
-        logging.info("📊 Evaluating forecast performance...")
-        
-        # Ensure temporal alignment
-        if not actual.index.equals(forecast.index):
-            raise ValueError("Mismatched indices between actual and forecast")
-            
-        # Calculate metrics
-        mae = mean_absolute_error(actual, forecast)
-        rmse = np.sqrt(mean_squared_error(actual, forecast))
-        mape = np.mean(np.abs((actual - forecast) / actual)) * 100
-        
-        logging.info(f"📈 Evaluation complete - MAE: {mae:.2f}, RMSE: {rmse:.2f}, MAPE: {mape:.2f}%")
-        return mae, rmse, mape
-        
-    except Exception as e:
-        logging.error(f"❌ Evaluation failed: {str(e)}")
-        raise ValueError(f"Evaluation error: {str(e)}")
+        tuple: (MAE, RMSE, MAPE)
 
-def plot_arima(actual, forecast, title="ARIMA Forecast vs Actual Prices"):
-    """
-    Visual comparison of actual and forecasted values.
-    
-    Parameters:
-        actual (pd.Series): Historical actual values
-        forecast (pd.Series): Forecasted values
-        title (str): Custom title for the plot
-    
     Raises:
-        ValueError: If input data cannot be plotted
+        ValueError: If evaluation fails due to invalid data.
     """
-    try:
-        logging.info("🎨 Generating comparison plot...")
-        
-        plt.figure(figsize=(12, 6))
-        plt.plot(actual.index, actual, label='Actual', color='blue', linewidth=2)
-        plt.plot(forecast.index, forecast, label='Forecast', 
-                linestyle='--', color='red', linewidth=1.5)
-        plt.title(title, fontsize=14)
-        plt.xlabel('Date', fontsize=12)
-        plt.ylabel('Price', fontsize=12)
-        plt.legend()
-        plt.grid(alpha=0.4)
-        plt.tight_layout()
-        
-        logging.info("🖼️ Plot displayed successfully")
-        plt.show()
-        
-    except Exception as e:
-        logging.error(f"❌ Plotting failed: {str(e)}")
-        raise ValueError(f"Plotting error: {str(e)}")
+    mae = mean_absolute_error(actual, forecast)
+    rmse = np.sqrt(mean_squared_error(actual, forecast))
+    mape = np.mean(np.abs((actual - forecast) / actual)) * 100
+    return mae, rmse, mape
 
+def plot_arima(actual, forecast, title="ARIMA Forecast vs Actual TSLA Closing Price"):
+    """
+    Plot ARIMA forecast vs actual values with aligned dates.
+    """
+    plt.figure(figsize=(12, 6))
+    plt.plot(actual.index, actual, label='Actual Close Price')
+    plt.plot(forecast.index, forecast, label='ARIMA Forecast', linestyle='--')
+    plt.title(title)
+    plt.xlabel('Date')
+    plt.ylabel('Close Price')
+    plt.legend()
+    plt.grid()
+    plt.show()
