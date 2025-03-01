@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from statsmodels.tsa.arima.model import ARIMA
+from statsmodels.tsa.stattools import adfuller
 from pmdarima import auto_arima
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
@@ -21,15 +22,15 @@ logging.basicConfig(
 
 def train_arima(data, train_size=None, train_end='2024-12-31'):
     """
-    Train an ARIMA model on TSLA Close price, optimizing parameters using auto_arima from pmdarima.
+    Train an ARIMA model on TSLA Close price, optimizing parameters using auto_arima.
 
-    This function splits the data into training and testing sets based on a specified end date or row count,
-    then uses auto_arima to find the optimal ARIMA parameters (p, d, q) for forecasting TSLA stock prices.
+    This function splits the data into training and testing sets, checks stationarity,
+    and uses auto_arima to find the optimal ARIMA parameters (p, d, q) for forecasting TSLA stock prices.
 
     Parameters:
-        data (pd.DataFrame): TSLA data with 'Close' column and Date index, typically loaded from TSLA_cleaned.csv.
-        train_size (int, optional): Number of training rows. If None, uses date-based split with train_end.
-        train_end (str, optional): End date for training data (default '2024-12-31'). Used when train_size is None.
+        data (pd.DataFrame): TSLA data with 'Close' column and Date index.
+        train_size (int, optional): Number of training rows. Defaults to date-based split.
+        train_end (str, optional): End date for training (default '2024-12-31').
 
     Returns:
         tuple: (fitted ARIMA model from pmdarima, optimal parameters as (p, d, q) tuple)
@@ -38,7 +39,6 @@ def train_arima(data, train_size=None, train_end='2024-12-31'):
         ValueError: If the data lacks a 'Close' column, contains missing values, or if parameter optimization fails.
     """
     try:
-        # Log the start of the training process
         logging.info("Starting ARIMA model training on TSLA Close price data.")
 
         # Validate input data
@@ -46,6 +46,8 @@ def train_arima(data, train_size=None, train_end='2024-12-31'):
             raise ValueError("TSLA DataFrame missing 'Close' column")
         if data['Close'].isnull().any():
             raise ValueError("TSLA Close data contains missing values")
+        if not isinstance(data.index, pd.DatetimeIndex):
+            raise ValueError("Data must have a DatetimeIndex")
 
         # Split data for training based on train_size or train_end
         if train_size is None:
@@ -55,9 +57,12 @@ def train_arima(data, train_size=None, train_end='2024-12-31'):
             train_data = data[:train_size]['Close']
             logging.info(f"Using row-based split for training. Training data size: {train_size} rows.")
 
-        # Ensure train_data is a pandas Series with a datetime index
-        if not isinstance(train_data.index, pd.DatetimeIndex):
-            raise ValueError("Training data must have a DatetimeIndex")
+        # Check stationarity with ADF test (if p-value > 0.05, data is non-stationary)
+        adf_result = adfuller(train_data.dropna())
+        logging.info(f"ADF Test - Statistic: {adf_result[0]}, p-value: {adf_result[1]}")
+        if adf_result[1] > 0.05:
+            logging.warning("Data appears non-stationary (p-value > 0.05). Applying differencing with d=1.")
+            train_data = train_data.diff().dropna()  # Apply first differencing
 
         # Use auto_arima to automatically determine optimal ARIMA parameters
         logging.info("Optimizing ARIMA parameters with auto_arima (seasonal=False, max_p=3, max_q=3)...")
@@ -66,7 +71,7 @@ def train_arima(data, train_size=None, train_end='2024-12-31'):
             seasonal=False,  # No seasonality based on Task 1 decomposition
             start_p=1, start_q=1, 
             max_p=3, max_q=3,  # Limit parameter search for efficiency
-            d=None,  # Automatically detect differencing order
+            d=None,  # Automatically detect differencing order (or use d=1 if non-stationary)
             trace=True,  # Show optimization progress for debugging
             error_action='ignore',  # Ignore errors during parameter search
             suppress_warnings=True  # Suppress non-critical warnings
@@ -87,7 +92,7 @@ def forecast_arima(model, steps, start_date):
     Forecast future TSLA Close prices using a trained ARIMA model and assign dates.
 
     This function generates out-of-sample forecasts for a specified number of steps, starting from a given date,
-    and returns a pandas Series with a datetime index for alignment with actual data.
+    and returns a pandas Series with a datetime index for alignment with actual data, ensuring business days.
 
     Parameters:
         model: Fitted ARIMA model from pmdarima.
@@ -109,6 +114,11 @@ def forecast_arima(model, steps, start_date):
         # Generate datetime index for the forecast period, using business days (B) to match stock market days
         dates = pd.date_range(start=start_date, periods=steps, freq='B')  # 'B' for business days
         forecast_series = pd.Series(forecast, index=dates)
+        
+        # Ensure the forecast values are finite and not NaN
+        if forecast_series.isnull().any():
+            logging.warning("Forecast contains NaN values. Checking model and data...")
+            raise ValueError("Forecast contains NaN values; check model training or data stationarity.")
         
         logging.info("ARIMA forecast completed successfully with datetime index.")
         return forecast_series
@@ -144,6 +154,8 @@ def evaluate_arima(actual, forecast):
             raise ValueError("Actual and forecast must have datetime indices")
         if len(actual) != len(forecast):
             raise ValueError("Actual and forecast lengths must match for evaluation")
+        if actual.isnull().any() or forecast.isnull().any():
+            raise ValueError("Actual or forecast contains NaN values; check data or forecast.")
 
         # Calculate evaluation metrics
         mae = mean_absolute_error(actual, forecast)
