@@ -154,7 +154,51 @@ def evaluate_lstm(actual, predicted):
     print(f"MAPE: {mape:.2f}%")
     return mae, rmse, mape
 
+from keras_tuner import Hyperband
 
+def tune_hyperparameters(X_train, y_train):
+    tuner = Hyperband(
+        lambda hp: build_tunable_model(
+            hp,
+            input_shape=(X_train.shape[1], 1)
+        ),
+        objective='val_loss',
+        max_epochs=10,
+        factor=3,
+        directory='tuning',
+        project_name='tsla_lstm'
+    )
+    
+    tuner.search(
+        X_train, y_train,
+        epochs=10,
+        validation_split=0.2,
+        callbacks=[EarlyStopping(patience=10)]
+    )
+    return tuner.get_best_models(num_models=1)[0]
+
+def build_tunable_model(hp, input_shape):
+    model = Sequential()
+    
+    # Tune layers and units
+    for i in range(hp.Int('num_layers', 1, 3)):
+        model.add(LSTM(
+            units=hp.Int(f'units_{i}', min_value=32, max_value=256, step=32),
+            return_sequences=(i < hp.Int('num_layers', 1, 3)-1),
+            input_shape=input_shape if i==0 else None
+        ))
+        model.add(Dropout(
+            hp.Float(f'dropout_{i}', 0.1, 0.5, step=0.1)
+        ))
+    
+    model.add(Dense(1))
+    
+    model.compile(
+        optimizer=tf.keras.optimizers.Adam(
+            hp.Float('learning_rate', 1e-4, 1e-2, sampling='log')),
+        loss='mse'
+    )
+    return model
 def plot_lstm_results(actual, predicted, dates):
     """Visualize actual vs predicted prices"""
     try:
