@@ -124,14 +124,25 @@ def train_lstm(model, X_train, y_train):
         raise
 
 def forecast_lstm(model, X_test, scaler, original_data):
-    """Generate forecasts"""
     try:
         logging.info("Generating forecasts")
         
+        # Generate predictions
         scaled_predictions = model.predict(X_test)
         predictions = scaler.inverse_transform(scaled_predictions)
         
-        last_prices = original_data['Close'].iloc[-len(predictions)-1:-1].values
+        # Calculate exact indices for alignment
+        start_idx = len(original_data) - len(X_test) - 1  # Start of test period -1
+        end_idx = start_idx + len(predictions)  # Exact length match
+        
+        # Get corresponding prices
+        last_prices = original_data['Close'].iloc[start_idx:end_idx].values
+        
+        # Validate lengths
+        if len(last_prices) != len(predictions):
+            raise ValueError(f"Price/prediction mismatch: {len(last_prices)} vs {len(predictions)}")
+            
+        # Calculate final prices
         predicted_prices = last_prices * (1 + predictions.flatten())
         
         return predicted_prices
@@ -140,22 +151,23 @@ def forecast_lstm(model, X_test, scaler, original_data):
         logging.error(f"Forecasting failed: {str(e)}")
         raise
 
-def evaluate_lstm(actual_prices, predicted_prices):
-    """Calculate evaluation metrics"""
-    try:
-        mae = mean_absolute_error(actual_prices, predicted_prices)
-        rmse = np.sqrt(mean_squared_error(actual_prices, predicted_prices))
-        mape = np.mean(np.abs((actual_prices - predicted_prices) / actual_prices)) * 100
-        
-        print(f"MAE: {mae:.2f}")
-        print(f"RMSE: {rmse:.2f}")
-        print(f"MAPE: {mape:.2f}%")
-        
-        return mae, rmse, mape
+def evaluate_lstm(actual, predicted):
+    """Calculate metrics with NaN safety checks"""
+    # Align indices and drop NaNs pairwise
+    df = pd.DataFrame({'Actual': actual, 'Predicted': predicted}).dropna()
+    
+    if len(df) == 0:
+        raise ValueError("No valid data for evaluation after NaN removal")
+    
+    mae = mean_absolute_error(df['Actual'], df['Predicted'])
+    rmse = np.sqrt(mean_squared_error(df['Actual'], df['Predicted']))
+    mape = np.mean(np.abs((df['Actual'] - df['Predicted']) / df['Actual'])) * 100
+    
+    print(f"MAE: {mae:.2f}")
+    print(f"RMSE: {rmse:.2f}")
+    print(f"MAPE: {mape:.2f}%")
+    return mae, rmse, mape
 
-    except Exception as e:
-        logging.error(f"Evaluation failed: {str(e)}")
-        raise
 
 def plot_lstm_results(actual, predicted, dates):
     """Visualize actual vs predicted prices"""
