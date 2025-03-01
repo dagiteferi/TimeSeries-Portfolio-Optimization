@@ -444,3 +444,20 @@ None
 2025-03-01 23:17:26,154 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
 2025-03-01 23:18:26,749 - INFO - Starting data preprocessing
 2025-03-01 23:18:26,751 - ERROR - Data preprocessing failed: argument of type 'method' is not iterable
+2025-03-01 23:23:35,109 - INFO - Loading TSLA data from CSV...
+2025-03-01 23:23:35,133 - INFO - Verifying TSLA data integrity...
+2025-03-01 23:23:35,136 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 23:23:52,534 - INFO - Starting data preprocessing
+2025-03-01 23:23:52,574 - INFO - Original data range: 2015-02-17 00:00:00 to 2025-01-30 00:00:00
+2025-03-01 23:23:52,587 - INFO - Training sequences: 2018
+2025-03-01 23:23:52,588 - INFO - Test sequences: 460
+2025-03-01 23:24:09,394 - INFO - Building LSTM model
+2025-03-01 23:24:09,599 - INFO - Model summary:
+None
+2025-03-01 23:24:14,547 - INFO - Building LSTM model
+2025-03-01 23:24:14,617 - INFO - Model summary:
+None
+2025-03-01 23:24:22,249 - INFO - Building LSTM model
+2025-03-01 23:24:22,321 - INFO - Model summary:
+None
+2025-03-01 23:24:57,759 - INFO - Starting model training
