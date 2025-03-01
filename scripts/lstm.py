@@ -117,7 +117,7 @@ def forecast_lstm(model, data, scaler, look_back=60):
         predictions = []
         current_batch = inputs.reshape((1, look_back, 1))
         
-        for _ in range(len(data) - look_back)):
+        for _ in range(len(data) - look_back):
             current_pred = model.predict(current_batch)[0]
             predictions.append(current_pred)
             current_batch = np.append(current_batch[:,1:,:], [[current_pred]], axis=1)

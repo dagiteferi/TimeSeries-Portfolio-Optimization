@@ -1,0 +1,2 @@
+2025-03-01 22:45:25,380 - INFO - LSTM Forecasting Pipeline Started
+2025-03-01 22:45:25,399 - ERROR - Main execution failed: [Errno 2] No such file or directory: 'TSLA_cleaned.csv'
