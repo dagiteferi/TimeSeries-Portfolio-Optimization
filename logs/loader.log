@@ -420,3 +420,6 @@ Warnings:
 2025-03-01 22:25:09,603 - INFO - SARIMA Evaluation - MAE: 15.31, RMSE: 18.87, MAPE: 3.76%
 2025-03-01 22:25:09,623 - INFO - Generating SARIMA results plot
 2025-03-01 22:25:10,007 - INFO - Plot generated successfully
+2025-03-01 22:38:08,965 - INFO - Loading TSLA data from CSV...
+2025-03-01 22:38:09,083 - INFO - Verifying TSLA data integrity...
+2025-03-01 22:38:09,086 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
