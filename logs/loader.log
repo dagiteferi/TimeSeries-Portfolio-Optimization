@@ -371,3 +371,6 @@ Warnings:
 2025-03-01 22:03:02,893 - INFO - Forecast completed successfully
 2025-03-01 22:03:29,355 - INFO - MAE: 15.31, RMSE: 18.87, MAPE: 3.76%
 2025-03-01 22:03:43,546 - INFO - MAE: 15.31, RMSE: 18.87, MAPE: 3.76%
+2025-03-01 22:16:37,524 - INFO - Loading TSLA data from CSV...
+2025-03-01 22:16:37,622 - INFO - Verifying TSLA data integrity...
+2025-03-01 22:16:37,625 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
