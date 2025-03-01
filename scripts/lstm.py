@@ -179,23 +179,23 @@ def tune_hyperparameters(X_train, y_train):
 
 def build_tunable_model(hp, input_shape):
     model = Sequential()
-    
-    # Tune layers and units
-    for i in range(hp.Int('num_layers', 1, 3)):
+    # Reduced ranges
+    for i in range(hp.Int('num_layers', 1, 2)):  # Max 2 layers
         model.add(LSTM(
-            units=hp.Int(f'units_{i}', min_value=32, max_value=256, step=32),
-            return_sequences=(i < hp.Int('num_layers', 1, 3)-1),
-            input_shape=input_shape if i==0 else None
+            units=hp.Int(f'units_{i}', 64, 128, step=32),  # 64-128 only
+            return_sequences=(i < 1),  # Only first layer returns sequences
+            input_shape=input_shape
         ))
         model.add(Dropout(
-            hp.Float(f'dropout_{i}', 0.1, 0.5, step=0.1)
+            hp.Choice(f'dropout_{i}', [0.2, 0.3])  # Fewer options
         ))
     
     model.add(Dense(1))
     
     model.compile(
         optimizer=tf.keras.optimizers.Adam(
-            hp.Float('learning_rate', 1e-4, 1e-2, sampling='log')),
+            hp.Choice('learning_rate', [1e-3, 3e-4])  # Limited rates
+        ),
         loss='mse'
     )
     return model
