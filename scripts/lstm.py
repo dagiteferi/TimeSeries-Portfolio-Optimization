@@ -1,11 +1,11 @@
-# lstm.py
+# lstm_optimized.py
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
-from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.metrics import mean_absolute_error, mean_squared_error
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 import matplotlib.pyplot as plt
 import logging
 import os
@@ -17,201 +17,157 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(os.path.join(LOG_DIR, "logs", "lstm.log")),
+        logging.FileHandler(os.path.join(LOG_DIR, "logs", "lstm_optimized.log")),
         logging.StreamHandler()
     ]
 )
 
-def preprocess_data(data, look_back=60):
-    """
-    Prepare LSTM-ready data with time steps
-    Returns scaled data, scaler, and reshaped datasets
-    """
+def preprocess_data(data_path, look_back=60, test_size=0.2):
+    """Preprocess data with proper time-series validation and scaling"""
     try:
-        logging.info("Preprocessing data for LSTM")
+        logging.info("Starting data preprocessing")
         
-        # 1. Select and scale Close prices
-        scaler = MinMaxScaler(feature_range=(0, 1))
-        scaled_data = scaler.fit_transform(data[['Close']])
+        # Load and clean data
+        data = pd.read_csv(data_path, index_col='Date', parse_dates=True)
+        data = data.asfreq('B').ffill()
+        logging.info(f"Original data range: {data.index.min()} to {data.index.max()}")
+
+        # Create percentage returns instead of raw prices
+        data['Returns'] = data['Close'].pct_change().dropna()
         
-        # 2. Create time-step sequences
-        X, y = [], []
-        for i in range(look_back, len(scaled_data)):
-            X.append(scaled_data[i-look_back:i, 0])
-            y.append(scaled_data[i, 0])
-            
-        X = np.array(X)
-        y = np.array(y)
+        # Split data before scaling
+        train_size = int(len(data) * (1 - test_size))
+        train_data = data.iloc[:train_size]
+        test_data = data.iloc[train_size:]
+
+        # Scale data to [-1, 1] range
+        scaler = MinMaxScaler(feature_range=(-1, 1))
+        train_scaled = scaler.fit_transform(train_data[['Returns']])
+        test_scaled = scaler.transform(test_data[['Returns']])
+
+        # Create time-step sequences
+        def create_sequences(data, look_back):
+            X, y = [], []
+            for i in range(look_back, len(data)):
+                X.append(data[i-look_back:i])
+                y.append(data[i])
+            return np.array(X), np.array(y)
+
+        X_train, y_train = create_sequences(train_scaled, look_back)
+        X_test, y_test = create_sequences(test_scaled, look_back)
+
+        # Reshape for LSTM [samples, timesteps, features]
+        X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
+        X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
+
+        logging.info(f"Training sequences: {X_train.shape[0]}")
+        logging.info(f"Test sequences: {X_test.shape[0]}")
         
-        # 3. Reshape for LSTM input [samples, timesteps, features]
-        X = np.reshape(X, (X.shape[0], X.shape[1], 1))
-        
-        logging.info(f"Created {len(X)} sequences with {look_back} time steps")
-        return X, y, scaler
-    
+        return X_train, y_train, X_test, y_test, scaler, data
+
     except Exception as e:
         logging.error(f"Data preprocessing failed: {str(e)}")
         raise
 
-def build_lstm_model(input_shape, units=50, dropout=0.2):
-    """
-    Construct LSTM model architecture
-    Returns compiled Keras model
-    """
+def build_lstm_model(input_shape):
+    """Construct optimized LSTM architecture"""
     try:
         logging.info("Building LSTM model")
         
         model = Sequential([
-            LSTM(units=units, return_sequences=True, input_shape=input_shape),
-            LSTM(units=units, return_sequences=False),
-            Dense(25),
+            LSTM(128, return_sequences=True, input_shape=input_shape,
+                recurrent_dropout=0.2),
+            Dropout(0.3),
+            LSTM(64, recurrent_dropout=0.2),
+            Dropout(0.2),
+            Dense(32, activation='relu'),
             Dense(1)
         ])
-        
-        model.compile(optimizer='adam', loss='mean_squared_error')
-        
+
+        model.compile(
+            optimizer='adam',
+            loss='mean_squared_error',
+            metrics=['mae']
+        )
+
         logging.info("Model summary:\n" + str(model.summary()))
         return model
-    
+
     except Exception as e:
         logging.error(f"Model construction failed: {str(e)}")
         raise
 
-def train_lstm(model, X_train, y_train, epochs=100, batch_size=32):
-    """
-    Train LSTM model with early stopping
-    Returns trained model and training history
-    """
+def train_model(model, X_train, y_train):
+    """Train model with early stopping and learning rate scheduling"""
     try:
         logging.info("Starting model training")
         
-        early_stop = EarlyStopping(monitor='loss', patience=10, verbose=1)
+        callbacks = [
+            EarlyStopping(monitor='val_loss', patience=15, restore_best_weights=True),
+            ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5)
+        ]
+
         history = model.fit(
-            X_train, y_train,
-            epochs=epochs,
-            batch_size=batch_size,
-            callbacks=[early_stop],
+            X_train,
+            y_train,
+            epochs=200,
+            batch_size=64,
+            validation_split=0.2,
+            callbacks=callbacks,
             verbose=1
         )
-        
+
         logging.info(f"Training stopped at epoch {len(history.history['loss'])}")
         return model, history
-    
+
     except Exception as e:
         logging.error(f"Training failed: {str(e)}")
         raise
 
-def forecast_lstm(model, data, scaler, look_back=60):
-    """
-    Generate forecasts using trained LSTM model
-    Returns inverse-transformed predictions
-    """
+def forecast_and_evaluate(model, X_test, y_test, scaler, original_data):
+    """Generate forecasts and calculate metrics"""
     try:
         logging.info("Generating forecasts")
         
-        # 1. Get last sequence from training data
-        inputs = data[-look_back:]
-        inputs = scaler.transform(inputs)
+        # Generate predictions
+        scaled_predictions = model.predict(X_test)
         
-        # 2. Generate multi-step forecast
-        predictions = []
-        current_batch = inputs.reshape((1, look_back, 1))
+        # Inverse transform predictions
+        predictions = scaler.inverse_transform(scaled_predictions)
+        actual_returns = scaler.inverse_transform(y_test.reshape(-1, 1))
         
-        for _ in range(len(data) - look_back):
-            current_pred = model.predict(current_batch)[0]
-            predictions.append(current_pred)
-            current_batch = np.append(current_batch[:,1:,:], [[current_pred]], axis=1)
-            
-        # 3. Inverse transform predictions
-        predictions = scaler.inverse_transform(np.array(predictions).reshape(-1, 1))
+        # Convert returns back to prices
+        last_prices = original_data['Close'].iloc[-len(predictions)-1:-1].values
+        predicted_prices = last_prices * (1 + predictions.flatten())
+        actual_prices = original_data['Close'].iloc[-len(predictions):].values
+
+        # Calculate metrics
+        mae = mean_absolute_error(actual_prices, predicted_prices)
+        rmse = np.sqrt(mean_squared_error(actual_prices, predicted_prices))
+        mape = np.mean(np.abs((actual_prices - predicted_prices) / actual_prices)) * 100
+
+        logging.info(f"MAE: {mae:.2f}, RMSE: {rmse:.2f}, MAPE: {mape:.2f}%")
         
-        logging.info(f"Generated {len(predictions)} forecasts")
-        return predictions.flatten()
-    
+        return predicted_prices, actual_prices
+
     except Exception as e:
         logging.error(f"Forecasting failed: {str(e)}")
         raise
 
-def evaluate_lstm(actual, predictions):
-    """
-    Calculate and log evaluation metrics
-    Returns MAE, RMSE, MAPE tuple
-    """
+def plot_results(actual, predicted, dates):
+    """Visualize actual vs predicted prices"""
     try:
-        logging.info("Evaluating LSTM performance")
-        
-        mae = mean_absolute_error(actual, predictions)
-        rmse = np.sqrt(mean_squared_error(actual, predictions))
-        mape = np.mean(np.abs((actual - predictions) / actual)) * 100
-        
-        logging.info(f"LSTM Evaluation - MAE: {mae:.2f}, RMSE: {rmse:.2f}, MAPE: {mape:.2f}%")
-        return mae, rmse, mape
-    
-    except Exception as e:
-        logging.error(f"Evaluation failed: {str(e)}")
-        raise
-
-def plot_lstm_results(actual, predictions, title="LSTM Forecast vs Actual"):
-    """
-    Generate comparison plot
-    """
-    try:
-        logging.info("Generating results plot")
-        
         plt.figure(figsize=(12, 6))
-        plt.plot(actual.index, actual, label='Actual Price', color='blue')
-        plt.plot(actual.index[len(actual)-len(predictions):], predictions, 
-                 label='LSTM Forecast', color='red', linestyle='--')
-        plt.title(title)
-        plt.xlabel('Date')
-        plt.ylabel('Price (USD)')
+        plt.plot(dates, actual, label='Actual Prices', color='blue')
+        plt.plot(dates, predicted, label='Predicted Prices', color='red', linestyle='--')
+        plt.title("TSLA Price Forecast vs Actual")
+        plt.xlabel("Date")
+        plt.ylabel("Price (USD)")
         plt.legend()
         plt.grid(True)
         plt.show()
-        
         logging.info("Plot generated successfully")
-    
     except Exception as e:
         logging.error(f"Plotting failed: {str(e)}")
         raise
 
-if __name__ == "__main__":
-    try:
-        logging.info("LSTM Forecasting Pipeline Started")
-        
-        # 1. Load data
-        data = pd.read_csv("TSLA_cleaned.csv", index_col="Date", parse_dates=True)
-        data = data.asfreq('B').ffill()
-        
-        # 2. Split data
-        train_size = int(len(data) * 0.8)
-        train_data = data.iloc[:train_size]
-        test_data = data.iloc[train_size:]
-        
-        # 3. Preprocess
-        X_train, y_train, scaler = preprocess_data(train_data, look_back=60)
-        
-        # 4. Build model
-        model = build_lstm_model(input_shape=(X_train.shape[1], X_train.shape[2]))
-        
-        # 5. Train model
-        trained_model, history = train_lstm(model, X_train, y_train)
-        
-        # 6. Generate forecasts
-        predictions = forecast_lstm(trained_model, train_data[['Close']], scaler)
-        
-        # 7. Prepare test data
-        valid = test_data.copy()
-        valid['Predictions'] = np.nan
-        valid.iloc[-len(predictions):, -1] = predictions[-len(valid):]
-        
-        # 8. Evaluate & plot
-        evaluate_lstm(valid['Close'], valid['Predictions'].dropna())
-        plot_lstm_results(valid['Close'], valid['Predictions'].dropna())
-        
-        logging.info("Forecast Sample:")
-        print(valid[['Close', 'Predictions']].tail())
-
-    except Exception as e:
-        logging.error(f"Main execution failed: {str(e)}")
-        raise
