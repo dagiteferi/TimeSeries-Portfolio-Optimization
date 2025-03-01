@@ -382,3 +382,41 @@ Warnings:
 2025-03-01 22:19:20,759 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
 2025-03-01 22:19:33,012 - INFO - Preprocessing data - converting to business day frequency
 2025-03-01 22:19:33,100 - INFO - New date range: 2015-02-17 00:00:00 to 2025-01-30 00:00:00
+2025-03-01 22:20:06,826 - INFO - Starting SARIMA model training
+2025-03-01 22:20:06,831 - INFO - Training period: 2015-02-17 to 2024-12-31
+2025-03-01 22:20:06,832 - INFO - Training samples: 2576
+2025-03-01 22:20:06,837 - INFO - Performing seasonal decomposition
+2025-03-01 22:20:07,722 - INFO - Seasonal strength: 8.09%
+2025-03-01 22:20:07,744 - INFO - Optimizing SARIMA parameters with seasonal_period=63
+2025-03-01 22:25:09,125 - INFO - Best SARIMA parameters: (0, 1, 2)(0, 0, 0, 63)
+2025-03-01 22:25:09,284 - INFO - Model summary:
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                      y   No. Observations:                 2576
+Model:               SARIMAX(0, 1, 2)   Log Likelihood               -8027.083
+Date:                Sat, 01 Mar 2025   AIC                          16060.166
+Time:                        22:25:09   BIC                          16077.727
+Sample:                    02-17-2015   HQIC                         16066.532
+                         - 12-31-2024                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ma.L1          0.1810      0.012     14.930      0.000       0.157       0.205
+ma.L2         -0.0314      0.011     -2.770      0.006      -0.054      -0.009
+sigma2        29.8661      0.329     90.696      0.000      29.221      30.512
+===================================================================================
+Ljung-Box (L1) (Q):                   0.00   Jarque-Bera (JB):             12732.95
+Prob(Q):                              1.00   Prob(JB):                         0.00
+Heteroskedasticity (H):             506.10   Skew:                             0.69
+Prob(H) (two-sided):                  0.00   Kurtosis:                        13.81
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+2025-03-01 22:25:09,448 - INFO - Generating 22-step forecast
+2025-03-01 22:25:09,560 - INFO - Forecast completed successfully
+2025-03-01 22:25:09,578 - INFO - Evaluating SARIMA model performance
+2025-03-01 22:25:09,603 - INFO - SARIMA Evaluation - MAE: 15.31, RMSE: 18.87, MAPE: 3.76%
+2025-03-01 22:25:09,623 - INFO - Generating SARIMA results plot
+2025-03-01 22:25:10,007 - INFO - Plot generated successfully
