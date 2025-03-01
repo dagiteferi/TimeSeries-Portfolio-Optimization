@@ -7,6 +7,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 import matplotlib.pyplot as plt
+
+import tensorflow as tf  
 import logging
 import os
 
@@ -23,28 +25,33 @@ logging.basicConfig(
 )
 
 def preprocess_data(data, look_back=60, test_size=0.2):
-    """Preprocess data with proper time-series validation and scaling"""
+    """Preprocess data with robust column checks"""
     try:
         logging.info("Starting data preprocessing")
         
-        # Clean and prepare data
+        # Validate required columns
+        if 'Close' not in data.columns:
+            raise KeyError("DataFrame must contain 'Close' column")
+        
+        # Clean data
         data = data.asfreq('B').ffill()
         logging.info(f"Original data range: {data.index.min()} to {data.index.max()}")
 
-        # Create percentage returns instead of raw prices
-        data['Returns'] = data['Close'].pct_change().dropna()
+        # Calculate returns and clean NaNs
+        data['Returns'] = data['Close'].pct_change()
+        data = data.dropna(subset=['Returns'])  # Remove rows with NaN returns
         
-        # Split data before scaling
+        # Split data
         train_size = int(len(data) * (1 - test_size))
         train_data = data.iloc[:train_size]
         test_data = data.iloc[train_size:]
 
-        # Scale data to [-1, 1] range
+        # Scale returns to [-1, 1]
         scaler = MinMaxScaler(feature_range=(-1, 1))
         train_scaled = scaler.fit_transform(train_data[['Returns']])
         test_scaled = scaler.transform(test_data[['Returns']])
 
-        # Create time-step sequences
+        # Create sequences
         def create_sequences(data, look_back):
             X, y = [], []
             for i in range(look_back, len(data)):
@@ -55,13 +62,10 @@ def preprocess_data(data, look_back=60, test_size=0.2):
         X_train, y_train = create_sequences(train_scaled, look_back)
         X_test, y_test = create_sequences(test_scaled, look_back)
 
-        # Reshape for LSTM [samples, timesteps, features]
+        # Reshape for LSTM
         X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
         X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 
-        logging.info(f"Training sequences: {X_train.shape[0]}")
-        logging.info(f"Test sequences: {X_test.shape[0]}")
-        
         return X_train, y_train, X_test, y_test, scaler
 
     except Exception as e:
@@ -69,59 +73,39 @@ def preprocess_data(data, look_back=60, test_size=0.2):
         raise
 
 def build_lstm_model(input_shape):
-    """Construct optimized LSTM architecture"""
-    try:
-        logging.info("Building LSTM model")
-        
-        model = Sequential([
-            LSTM(128, return_sequences=True, input_shape=input_shape,
-                recurrent_dropout=0.2),
-            Dropout(0.3),
-            LSTM(64, recurrent_dropout=0.2),
-            Dropout(0.2),
-            Dense(32, activation='relu'),
-            Dense(1)
-        ])
-
-        model.compile(
-            optimizer='adam',
-            loss='mean_squared_error',
-            metrics=['mae']
-        )
-
-        logging.info("Model summary:\n" + str(model.summary()))
-        return model
-
-    except Exception as e:
-        logging.error(f"Model construction failed: {str(e)}")
-        raise
+    """Construct LSTM model with TensorFlow imports"""
+    model = tf.keras.Sequential([  # Explicitly use tf.keras
+        tf.keras.layers.LSTM(64, return_sequences=True, input_shape=input_shape),
+        tf.keras.layers.Dropout(0.2),
+        tf.keras.layers.LSTM(32),
+        tf.keras.layers.Dense(1)
+    ])
+    
+    # Use TensorFlow's Adam optimizer
+    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
+    
+    model.compile(
+        optimizer=optimizer,
+        loss='mean_squared_error'
+    )
+    return model
 
 def train_lstm(model, X_train, y_train):
-    """Train model with early stopping and learning rate scheduling"""
-    try:
-        logging.info("Starting model training")
-        
-        callbacks = [
-            EarlyStopping(monitor='val_loss', patience=15, restore_best_weights=True),
-            ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5)
-        ]
-
-        history = model.fit(
-            X_train,
-            y_train,
-            epochs=200,
-            batch_size=64,
-            validation_split=0.2,
-            callbacks=callbacks,
-            verbose=1
-        )
-
-        logging.info(f"Training stopped at epoch {len(history.history['loss'])}")
-        return model, history
-
-    except Exception as e:
-        logging.error(f"Training failed: {str(e)}")
-        raise
+    callbacks = [
+        EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True),
+        ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5)
+    ]
+    
+    history = model.fit(
+        X_train,
+        y_train,
+        epochs=100,
+        batch_size=32,
+        validation_split=0.2,
+        callbacks=callbacks,
+        verbose=1
+    )
+    return model, history
 
 def forecast_lstm(model, X_test, scaler, original_data):
     try:
@@ -129,24 +113,26 @@ def forecast_lstm(model, X_test, scaler, original_data):
         
         # Generate predictions
         scaled_predictions = model.predict(X_test)
+        print("Scaled predictions sample:", scaled_predictions[:5])  # Check first predictions
+        
+        # Inverse transform
         predictions = scaler.inverse_transform(scaled_predictions)
+        print("Inverse transformed sample:", predictions[:5])
         
-        # Calculate exact indices for alignment
-        start_idx = len(original_data) - len(X_test) - 1  # Start of test period -1
-        end_idx = start_idx + len(predictions)  # Exact length match
+        # Calculate indices
+        start_idx = len(original_data) - len(X_test) - 1
+        end_idx = start_idx + len(predictions)
+        print(f"Index range: {start_idx} to {end_idx}")
         
-        # Get corresponding prices
+        # Get prices
         last_prices = original_data['Close'].iloc[start_idx:end_idx].values
+        print("Last prices sample:", last_prices[:5])
         
-        # Validate lengths
-        if len(last_prices) != len(predictions):
-            raise ValueError(f"Price/prediction mismatch: {len(last_prices)} vs {len(predictions)}")
-            
         # Calculate final prices
         predicted_prices = last_prices * (1 + predictions.flatten())
+        print("Final prices sample:", predicted_prices[:5])
         
         return predicted_prices
-
     except Exception as e:
         logging.error(f"Forecasting failed: {str(e)}")
         raise
