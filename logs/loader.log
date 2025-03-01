@@ -302,3 +302,72 @@ std     116.616621  7.388527e+07
 2025-03-01 21:52:03,076 - INFO - Forecasting 19 steps starting from 2025-01-01 with ARIMA model...
 2025-03-01 21:52:03,086 - WARNING - Forecast contains NaN values. Checking model and data...
 2025-03-01 21:52:03,087 - ERROR - Error forecasting with ARIMA: Forecast contains NaN values; check model training or data stationarity.
+2025-03-01 21:56:53,374 - INFO - Loading TSLA data from CSV...
+2025-03-01 21:56:53,403 - INFO - Verifying TSLA data integrity...
+2025-03-01 21:56:53,405 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:57:44,263 - INFO - Starting ARIMA model training
+2025-03-01 21:57:44,345 - INFO - Training period: 2015-02-17 to 2024-12-31
+2025-03-01 21:57:55,199 - INFO - Best ARIMA parameters: (0, 1, 2)
+2025-03-01 21:57:55,217 - INFO - Model summary:
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                      y   No. Observations:                 2576
+Model:               SARIMAX(0, 1, 2)   Log Likelihood               -8027.083
+Date:                Sat, 01 Mar 2025   AIC                          16060.166
+Time:                        21:57:55   BIC                          16077.727
+Sample:                    02-17-2015   HQIC                         16066.532
+                         - 12-31-2024                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ma.L1          0.1810      0.012     14.930      0.000       0.157       0.205
+ma.L2         -0.0314      0.011     -2.770      0.006      -0.054      -0.009
+sigma2        29.8661      0.329     90.696      0.000      29.221      30.512
+===================================================================================
+Ljung-Box (L1) (Q):                   0.00   Jarque-Bera (JB):             12732.95
+Prob(Q):                              1.00   Prob(JB):                         0.00
+Heteroskedasticity (H):             506.10   Skew:                             0.69
+Prob(H) (two-sided):                  0.00   Kurtosis:                        13.81
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+2025-03-01 21:58:13,939 - INFO - Starting ARIMA model training
+2025-03-01 21:58:14,088 - INFO - Training period: 2015-02-17 to 2024-12-31
+2025-03-01 21:58:24,465 - INFO - Best ARIMA parameters: (0, 1, 2)
+2025-03-01 21:58:24,471 - INFO - Model summary:
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                      y   No. Observations:                 2576
+Model:               SARIMAX(0, 1, 2)   Log Likelihood               -8027.083
+Date:                Sat, 01 Mar 2025   AIC                          16060.166
+Time:                        21:58:24   BIC                          16077.727
+Sample:                    02-17-2015   HQIC                         16066.532
+                         - 12-31-2024                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ma.L1          0.1810      0.012     14.930      0.000       0.157       0.205
+ma.L2         -0.0314      0.011     -2.770      0.006      -0.054      -0.009
+sigma2        29.8661      0.329     90.696      0.000      29.221      30.512
+===================================================================================
+Ljung-Box (L1) (Q):                   0.00   Jarque-Bera (JB):             12732.95
+Prob(Q):                              1.00   Prob(JB):                         0.00
+Heteroskedasticity (H):             506.10   Skew:                             0.69
+Prob(H) (two-sided):                  0.00   Kurtosis:                        13.81
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+2025-03-01 22:01:30,953 - INFO - Loading TSLA data from CSV...
+2025-03-01 22:01:30,985 - INFO - Verifying TSLA data integrity...
+2025-03-01 22:01:30,990 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 22:01:36,806 - INFO - Starting ARIMA model training
+2025-03-01 22:01:36,865 - INFO - Training period: 2015-02-17 to 2024-12-31
+2025-03-01 22:01:46,470 - INFO - Best ARIMA parameters: (0, 1, 2)
+2025-03-01 22:03:02,775 - INFO - Forecasting 22 steps
+2025-03-01 22:03:02,893 - INFO - Forecast completed successfully
+2025-03-01 22:03:29,355 - INFO - MAE: 15.31, RMSE: 18.87, MAPE: 3.76%
+2025-03-01 22:03:43,546 - INFO - MAE: 15.31, RMSE: 18.87, MAPE: 3.76%
