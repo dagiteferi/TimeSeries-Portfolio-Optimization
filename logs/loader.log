@@ -439,3 +439,8 @@ None
 2025-03-01 22:55:33,541 - INFO - LSTM Evaluation - MAE: 296.10, RMSE: 303.87, MAPE: 124.45%
 2025-03-01 22:55:33,543 - INFO - Generating results plot
 2025-03-01 22:55:33,954 - INFO - Plot generated successfully
+2025-03-01 23:17:26,119 - INFO - Loading TSLA data from CSV...
+2025-03-01 23:17:26,153 - INFO - Verifying TSLA data integrity...
+2025-03-01 23:17:26,154 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 23:18:26,749 - INFO - Starting data preprocessing
+2025-03-01 23:18:26,751 - ERROR - Data preprocessing failed: argument of type 'method' is not iterable

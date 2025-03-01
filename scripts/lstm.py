@@ -1,4 +1,4 @@
-# lstm_optimized.py
+# lstm.py
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
@@ -22,13 +22,12 @@ logging.basicConfig(
     ]
 )
 
-def preprocess_data(data_path, look_back=60, test_size=0.2):
+def preprocess_data(data, look_back=60, test_size=0.2):
     """Preprocess data with proper time-series validation and scaling"""
     try:
         logging.info("Starting data preprocessing")
         
-        # Load and clean data
-        data = pd.read_csv(data_path, index_col='Date', parse_dates=True)
+        # Clean and prepare data
         data = data.asfreq('B').ffill()
         logging.info(f"Original data range: {data.index.min()} to {data.index.max()}")
 
@@ -63,7 +62,7 @@ def preprocess_data(data_path, look_back=60, test_size=0.2):
         logging.info(f"Training sequences: {X_train.shape[0]}")
         logging.info(f"Test sequences: {X_test.shape[0]}")
         
-        return X_train, y_train, X_test, y_test, scaler, data
+        return X_train, y_train, X_test, y_test, scaler
 
     except Exception as e:
         logging.error(f"Data preprocessing failed: {str(e)}")
@@ -97,7 +96,7 @@ def build_lstm_model(input_shape):
         logging.error(f"Model construction failed: {str(e)}")
         raise
 
-def train_model(model, X_train, y_train):
+def train_lstm(model, X_train, y_train):
     """Train model with early stopping and learning rate scheduling"""
     try:
         logging.info("Starting model training")
@@ -124,37 +123,41 @@ def train_model(model, X_train, y_train):
         logging.error(f"Training failed: {str(e)}")
         raise
 
-def forecast_and_evaluate(model, X_test, y_test, scaler, original_data):
-    """Generate forecasts and calculate metrics"""
+def forecast_lstm(model, X_test, scaler, original_data):
+    """Generate forecasts"""
     try:
         logging.info("Generating forecasts")
         
-        # Generate predictions
         scaled_predictions = model.predict(X_test)
-        
-        # Inverse transform predictions
         predictions = scaler.inverse_transform(scaled_predictions)
-        actual_returns = scaler.inverse_transform(y_test.reshape(-1, 1))
         
-        # Convert returns back to prices
         last_prices = original_data['Close'].iloc[-len(predictions)-1:-1].values
         predicted_prices = last_prices * (1 + predictions.flatten())
-        actual_prices = original_data['Close'].iloc[-len(predictions):].values
-
-        # Calculate metrics
-        mae = mean_absolute_error(actual_prices, predicted_prices)
-        rmse = np.sqrt(mean_squared_error(actual_prices, predicted_prices))
-        mape = np.mean(np.abs((actual_prices - predicted_prices) / actual_prices)) * 100
-
-        logging.info(f"MAE: {mae:.2f}, RMSE: {rmse:.2f}, MAPE: {mape:.2f}%")
         
-        return predicted_prices, actual_prices
+        return predicted_prices
 
     except Exception as e:
         logging.error(f"Forecasting failed: {str(e)}")
         raise
 
-def plot_results(actual, predicted, dates):
+def evaluate_lstm(actual_prices, predicted_prices):
+    """Calculate evaluation metrics"""
+    try:
+        mae = mean_absolute_error(actual_prices, predicted_prices)
+        rmse = np.sqrt(mean_squared_error(actual_prices, predicted_prices))
+        mape = np.mean(np.abs((actual_prices - predicted_prices) / actual_prices)) * 100
+        
+        print(f"MAE: {mae:.2f}")
+        print(f"RMSE: {rmse:.2f}")
+        print(f"MAPE: {mape:.2f}%")
+        
+        return mae, rmse, mape
+
+    except Exception as e:
+        logging.error(f"Evaluation failed: {str(e)}")
+        raise
+
+def plot_lstm_results(actual, predicted, dates):
     """Visualize actual vs predicted prices"""
     try:
         plt.figure(figsize=(12, 6))
@@ -166,8 +169,7 @@ def plot_results(actual, predicted, dates):
         plt.legend()
         plt.grid(True)
         plt.show()
-        logging.info("Plot generated successfully")
+        
     except Exception as e:
         logging.error(f"Plotting failed: {str(e)}")
         raise
-
