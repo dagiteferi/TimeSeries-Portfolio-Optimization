@@ -49,8 +49,8 @@ def forecast_arima(model, steps):
         ValueError: If forecasting fails due to invalid model or steps.
     """
     try:
-        # Use .forecast() for statsmodels ARIMA (post-0.13.0), ensuring the model is fitted
-        forecast = model.get_forecast(steps=steps).predicted_mean  # Use get_forecast for predicted mean
+        # Use .forecast() for statsmodels ARIMA (post-0.13.0), ensuring compatibility
+        forecast = model.forecast(steps=steps)  # Use forecast() directly for out-of-sample predictions
         return forecast
     except Exception as e:
         raise ValueError(f"Error forecasting with ARIMA: {str(e)}")
