@@ -423,3 +423,19 @@ Warnings:
 2025-03-01 22:38:08,965 - INFO - Loading TSLA data from CSV...
 2025-03-01 22:38:09,083 - INFO - Verifying TSLA data integrity...
 2025-03-01 22:38:09,086 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 22:46:03,857 - INFO - Loading TSLA data from CSV...
+2025-03-01 22:46:03,889 - INFO - Verifying TSLA data integrity...
+2025-03-01 22:46:03,893 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 22:46:18,637 - INFO - Preprocessing data for LSTM
+2025-03-01 22:46:18,650 - INFO - Created 2018 sequences with 60 time steps
+2025-03-01 22:46:18,653 - INFO - Building LSTM model
+2025-03-01 22:46:19,000 - INFO - Model summary:
+None
+2025-03-01 22:46:19,003 - INFO - Starting model training
+2025-03-01 22:49:43,350 - INFO - Training stopped at epoch 64
+2025-03-01 22:49:43,367 - INFO - Generating forecasts
+2025-03-01 22:55:33,508 - INFO - Generated 2018 forecasts
+2025-03-01 22:55:33,529 - INFO - Evaluating LSTM performance
+2025-03-01 22:55:33,541 - INFO - LSTM Evaluation - MAE: 296.10, RMSE: 303.87, MAPE: 124.45%
+2025-03-01 22:55:33,543 - INFO - Generating results plot
+2025-03-01 22:55:33,954 - INFO - Plot generated successfully
