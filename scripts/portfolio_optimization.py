@@ -17,8 +17,8 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()]
 )
 
-
-
+# Define the root directory (adjust as needed)
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def load_historical_data(ticker):
     """
@@ -64,6 +64,7 @@ def load_historical_data(ticker):
     except Exception as e:
         logging.error(f"Error loading data for {ticker}: {e}")
         return None
+
 def forecast_prices(data, tsla_forecast):
     """
     Forecast prices for BND and SPY using historical average returns.
