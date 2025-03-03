@@ -1,38 +1,17 @@
-"""
-portfolio_optimization.py
-This script optimizes a portfolio of TSLA, BND, and SPY based on forecasted prices.
-"""
-
-import numpy as np
-import pandas as pd
-import os
-from scipy.optimize import minimize
-import logging
-from datetime import datetime
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.StreamHandler()]
-)
-
-# Define the root directory (adjust as needed)
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-
 import os
 import pandas as pd
 import logging
 
-# Define the correct data directory path
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
+DATA_DIR = "c:/Users/HP/Documents/Dagii/week-11/TimeSeries-Portfolio-Optimization/data"
 
-def load_historical_data(ticker):
+def load_historical_data(ticker, file_name=None, skiprows=3):
     """
     Load historical data for a given ticker from the data folder.
     
     Parameters:
         ticker (str): The ticker symbol (e.g., "TSLA").
+        file_name (str, optional): Custom file name for the ticker. Defaults to None.
+        skiprows (int, optional): Number of rows to skip in the CSV file. Defaults to 3.
     
     Returns:
         pd.DataFrame: Historical data for the ticker.
@@ -40,19 +19,19 @@ def load_historical_data(ticker):
     try:
         logging.info(f"Loading data for {ticker}...")
 
-        # Construct the file path correctly
-        if ticker == "TSLA":
-            file_path = os.path.join(DATA_DIR, "cleaned_tesla.csv")  # Correct path
+        # Construct the file path
+        if file_name:
+            file_path = os.path.join(DATA_DIR, file_name)
         else:
             file_path = os.path.join(DATA_DIR, f"{ticker}_data.csv")
 
-        # Ensure the file exists before attempting to read it
+        # Ensure the file exists
         if not os.path.exists(file_path):
             logging.error(f"File not found: {file_path}")
             return None
 
-        # Load the data, skipping the first 3 rows
-        data = pd.read_csv(file_path, skiprows=3)
+        # Load the data
+        data = pd.read_csv(file_path, skiprows=skiprows)
 
         # Print the number of columns for debugging
         print(f"Number of columns in {ticker}_data.csv: {len(data.columns)}")
@@ -66,6 +45,11 @@ def load_historical_data(ticker):
             data.columns = ["Price", "Close", "High", "Low", "Volume"]
         elif len(data.columns) == 6:
             data.columns = ["Price", "Close", "High", "Low", "Open", "Volume"]
+        elif len(data.columns) == 9:  # Handle 10 columns for TSLA
+            data.columns = [
+                "Date", "Price", "Close", "High", "Low", "Volume", 
+                "Daily_Return", "Rolling_Mean", "Rolling_Std", "Z_Score"
+            ]
         else:
             logging.error(f"Unexpected number of columns in {ticker}_data.csv: {len(data.columns)}")
             return None
