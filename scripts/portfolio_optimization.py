@@ -21,7 +21,7 @@ def historical_data():
    
     logging.info("Fetching historical data for TSLA, BND, and SPY...")
     try:
-        # Fetch data
+        # read data
         tsla = pd.read_csv('../data/TSLA_cleaned.csv', index_col='Date', parse_dates=True)
         bnd = yf.download('BND', start='2020-01-01', end=datetime.today().strftime('%Y-%m-%d'))
         spy = yf.download('SPY', start='2020-01-01', end=datetime.today().strftime('%Y-%m-%d'))
