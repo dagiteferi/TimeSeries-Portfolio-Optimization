@@ -18,68 +18,52 @@ logging.basicConfig(
 )
 
 
-def historical_data():
+
+
+def load_historical_data(ticker):
     """
-    Load and verify historical data for TSLA, BND, and SPY from CSV files, ensuring data integrity.
-
+    Load historical data for a given ticker from the data folder.
+    
+    Parameters:
+        ticker (str): The ticker symbol (e.g., "TSLA").
+    
     Returns:
-        pd.DataFrame: Combined historical data with Date as index.
-
-    Raises:
-        Exception: If data loading or verification fails, with details logged.
+        pd.DataFrame: Historical data for the ticker.
     """
     try:
-        # Define paths to CSV files
-        ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        tsla_path = os.path.join(ROOT_DIR, "data", "TSLA_cleaned.csv")
-        bnd_path = os.path.join(ROOT_DIR, "data", "BND_data.csv")
-        spy_path = os.path.join(ROOT_DIR, "data", "SPY_data.csv")
-
-        # Load TSLA data
-        logging.info("Loading TSLA data from CSV...")
-        tsla = pd.read_csv(tsla_path, index_col="Date", parse_dates=True)
-        if "Close" not in tsla.columns:
-            raise ValueError("TSLA DataFrame missing 'Close' column")
-        if tsla.isnull().any().any():
-            raise ValueError("TSLA DataFrame contains missing values")
-        logging.info(f"TSLA data loaded successfully. Shape: {tsla.shape}")
-
-        # Load BND data
-        logging.info("Loading BND data from CSV...")
-        bnd = pd.read_csv(bnd_path, index_col="Date", parse_dates=True)
-        if "Close" not in bnd.columns:
-            raise ValueError("BND DataFrame missing 'Close' column")
-        if bnd.isnull().any().any():
-            raise ValueError("BND DataFrame contains missing values")
-        logging.info(f"BND data loaded successfully. Shape: {bnd.shape}")
-
-        # Load SPY data
-        logging.info("Loading SPY data from CSV...")
-        spy = pd.read_csv(spy_path, index_col="Date", parse_dates=True)
-        if "Close" not in spy.columns:
-            raise ValueError("SPY DataFrame missing 'Close' column")
-        if spy.isnull().any().any():
-            raise ValueError("SPY DataFrame contains missing values")
-        logging.info(f"SPY data loaded successfully. Shape: {spy.shape}")
-
-        # Combine data
-        logging.info("Combining TSLA, BND, and SPY data...")
-        data = tsla[['Close']].rename(columns={'Close': 'TSLA'})
-        data['BND'] = bnd['Close']
-        data['SPY'] = spy['Close']
-        data = data.dropna()  # Remove missing values
-
-        # Ensure the index is a datetime and aligned to business days
-        data = data.copy()
+        logging.info(f"Loading data for {ticker}...")
+        
+        # Construct the file path
+        file_path = os.path.join(ROOT_DIR, "data", f"{ticker}_data.csv")
+        
+        # Load the data, skipping the first 3 rows
+        data = pd.read_csv(file_path, skiprows=3)
+        
+        # Print the number of columns for debugging
+        print(f"Number of columns in {ticker}_data.csv: {len(data.columns)}")
+        
+        # Set the first column as the index and parse dates
+        data.set_index(data.columns[0], inplace=True)
         data.index = pd.to_datetime(data.index)
-        data = data.asfreq('B').ffill()
-
-        logging.info(f"Combined data loaded successfully. Shape: {data.shape}")
+        
+        # Rename columns based on the number of columns
+        if len(data.columns) == 5:
+            data.columns = ["Price", "Close", "High", "Low", "Volume"]
+        elif len(data.columns) == 6:
+            data.columns = ["Price", "Close", "High", "Low", "Open", "Volume"]
+        else:
+            logging.error(f"Unexpected number of columns in {ticker}_data.csv: {len(data.columns)}")
+            return None
+        
+        # Reset the index to make Date a column and rename it
+        data.reset_index(inplace=True)
+        data.rename(columns={data.columns[0]: "Date"}, inplace=True)
+        
+        logging.info(f"Successfully loaded data for {ticker} from {file_path}.")
         return data
-
     except Exception as e:
-        logging.error(f"Error loading historical data: {str(e)}")
-        raise
+        logging.error(f"Error loading data for {ticker}: {e}")
+        return None
 def forecast_prices(data, tsla_forecast):
     """
     Forecast prices for BND and SPY using historical average returns.
