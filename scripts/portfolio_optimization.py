@@ -16,7 +16,7 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()]
 )
 
-def fetch_historical_data():
+def historical_data():
     """
     Fetch historical data for TSLA, BND, and SPY from local CSV files.
     
