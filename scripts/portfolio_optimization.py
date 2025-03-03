@@ -34,30 +34,17 @@ def load_historical_data(ticker):
         logging.info(f"Loading data for {ticker}...")
         
         # Construct the file path
-        file_path = os.path.join(ROOT_DIR, "data", f"{ticker}_data.csv")
-        
-        # Load the data, skipping the first 3 rows
-        data = pd.read_csv(file_path, skiprows=3)
-        
-        # Print the number of columns for debugging
-        print(f"Number of columns in {ticker}_data.csv: {len(data.columns)}")
-        
-        # Set the first column as the index and parse dates
-        data.set_index(data.columns[0], inplace=True)
-        data.index = pd.to_datetime(data.index)
-        
-        # Rename columns based on the number of columns
-        if len(data.columns) == 5:
-            data.columns = ["Price", "Close", "High", "Low", "Volume"]
-        elif len(data.columns) == 6:
-            data.columns = ["Price", "Close", "High", "Low", "Open", "Volume"]
+        if ticker == "TSLA":
+            file_path = os.path.join(ROOT_DIR, "data", "cleaned_tesla.csv")  # Use cleaned Tesla data
         else:
-            logging.error(f"Unexpected number of columns in {ticker}_data.csv: {len(data.columns)}")
-            return None
+            file_path = os.path.join(ROOT_DIR, "data", f"{ticker}_data.csv")
         
-        # Reset the index to make Date a column and rename it
-        data.reset_index(inplace=True)
-        data.rename(columns={data.columns[0]: "Date"}, inplace=True)
+        # Load the data
+        data = pd.read_csv(file_path, index_col='Date', parse_dates=True)
+        
+        # Rename columns for consistency
+        if 'Close' not in data.columns:
+            data.rename(columns={'Adj Close': 'Close'}, inplace=True)
         
         logging.info(f"Successfully loaded data for {ticker} from {file_path}.")
         return data
