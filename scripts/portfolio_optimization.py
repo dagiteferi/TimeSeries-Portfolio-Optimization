@@ -17,13 +17,8 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()]
 )
 
-def fetch_historical_data():
-    """
-    Fetch historical data for TSLA, BND, and SPY.
-    
-    Returns:
-        data (DataFrame): Historical prices for all assets.
-    """
+def historical_data():
+   
     logging.info("Fetching historical data for TSLA, BND, and SPY...")
     try:
         # Fetch data
