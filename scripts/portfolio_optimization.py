@@ -5,6 +5,7 @@ This script optimizes a portfolio of TSLA, BND, and SPY based on forecasted pric
 
 import numpy as np
 import pandas as pd
+import os
 from scipy.optimize import minimize
 import logging
 from datetime import datetime
@@ -16,33 +17,68 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()]
 )
 
+
 def historical_data():
     """
-    Fetch historical data for TSLA, BND, and SPY from local CSV files.
-    
+    Load and verify historical data for TSLA, BND, and SPY from CSV files, ensuring data integrity.
+
     Returns:
-        data (DataFrame): Historical prices for all assets.
+        pd.DataFrame: Combined historical data with Date as index.
+
+    Raises:
+        Exception: If data loading or verification fails, with details logged.
     """
-    logging.info("Loading historical data for TSLA, BND, and SPY from local files...")
     try:
-        # Load data from CSV files
-        tsla = pd.read_csv('../data/TSLA_cleaned.csv', index_col='Date', parse_dates=True)
-        bnd = pd.read_csv('../data/BND_data.csv', index_col='Date', parse_dates=True)
-        spy = pd.read_csv('../data/SPY_data.csv', index_col='Date', parse_dates=True)
-        
+        # Define paths to CSV files
+        ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        tsla_path = os.path.join(ROOT_DIR, "data", "TSLA_cleaned.csv")
+        bnd_path = os.path.join(ROOT_DIR, "data", "BND_data.csv")
+        spy_path = os.path.join(ROOT_DIR, "data", "SPY_data.csv")
+
+        # Load TSLA data
+        logging.info("Loading TSLA data from CSV...")
+        tsla = pd.read_csv(tsla_path, index_col="Date", parse_dates=True)
+        if "Close" not in tsla.columns:
+            raise ValueError("TSLA DataFrame missing 'Close' column")
+        if tsla.isnull().any().any():
+            raise ValueError("TSLA DataFrame contains missing values")
+        logging.info(f"TSLA data loaded successfully. Shape: {tsla.shape}")
+
+        # Load BND data
+        logging.info("Loading BND data from CSV...")
+        bnd = pd.read_csv(bnd_path, index_col="Date", parse_dates=True)
+        if "Close" not in bnd.columns:
+            raise ValueError("BND DataFrame missing 'Close' column")
+        if bnd.isnull().any().any():
+            raise ValueError("BND DataFrame contains missing values")
+        logging.info(f"BND data loaded successfully. Shape: {bnd.shape}")
+
+        # Load SPY data
+        logging.info("Loading SPY data from CSV...")
+        spy = pd.read_csv(spy_path, index_col="Date", parse_dates=True)
+        if "Close" not in spy.columns:
+            raise ValueError("SPY DataFrame missing 'Close' column")
+        if spy.isnull().any().any():
+            raise ValueError("SPY DataFrame contains missing values")
+        logging.info(f"SPY data loaded successfully. Shape: {spy.shape}")
+
         # Combine data
+        logging.info("Combining TSLA, BND, and SPY data...")
         data = tsla[['Close']].rename(columns={'Close': 'TSLA'})
         data['BND'] = bnd['Close']
         data['SPY'] = spy['Close']
         data = data.dropna()  # Remove missing values
-        
-        logging.info("Historical data loaded successfully.")
+
+        # Ensure the index is a datetime and aligned to business days
+        data = data.copy()
+        data.index = pd.to_datetime(data.index)
+        data = data.asfreq('B').ffill()
+
+        logging.info(f"Combined data loaded successfully. Shape: {data.shape}")
         return data
-    except KeyError as e:
-        logging.error(f"Error: Column 'Date' or 'Close' not found in CSV file. Please check the file structure.")
-        raise
+
     except Exception as e:
-        logging.error(f"Error loading historical data: {e}")
+        logging.error(f"Error loading historical data: {str(e)}")
         raise
 def forecast_prices(data, tsla_forecast):
     """
