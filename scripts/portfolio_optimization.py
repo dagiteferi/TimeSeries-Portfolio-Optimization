@@ -1,6 +1,9 @@
 import os
+import numpy as np
 import pandas as pd
 import logging
+from scipy.optimize import minimize
+import matplotlib.pyplot as plt
 
 DATA_DIR = "c:/Users/HP/Documents/Dagii/week-11/TimeSeries-Portfolio-Optimization/data"
 
@@ -67,7 +70,6 @@ def load_historical_data(ticker, file_name=None, skiprows=3):
     except Exception as e:
         logging.error(f"Error loading data for {ticker}: {e}")
         return None
-
 
 def forecast_prices(data, tsla_forecast):
     """
@@ -178,8 +180,6 @@ def plot_portfolio_performance(forecast_df, optimal_weights):
         forecast_df (DataFrame): Forecasted prices.
         optimal_weights (array): Optimized portfolio weights.
     """
-    import matplotlib.pyplot as plt
-    
     try:
         # Calculate cumulative returns
         returns = forecast_df.pct_change().dropna()
