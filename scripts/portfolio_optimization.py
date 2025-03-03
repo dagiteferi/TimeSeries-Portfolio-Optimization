@@ -5,7 +5,6 @@ This script optimizes a portfolio of TSLA, BND, and SPY based on forecasted pric
 
 import numpy as np
 import pandas as pd
-import yfinance as yf
 from scipy.optimize import minimize
 import logging
 from datetime import datetime
@@ -17,14 +16,19 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()]
 )
 
-def historical_data():
-   
-    logging.info("Fetching historical data for TSLA, BND, and SPY...")
+def fetch_historical_data():
+    """
+    Fetch historical data for TSLA, BND, and SPY from local CSV files.
+    
+    Returns:
+        data (DataFrame): Historical prices for all assets.
+    """
+    logging.info("Loading historical data for TSLA, BND, and SPY from local files...")
     try:
-        # read data
+        # Load data from CSV files
         tsla = pd.read_csv('../data/TSLA_cleaned.csv', index_col='Date', parse_dates=True)
-        bnd = yf.download('BND', start='2020-01-01', end=datetime.today().strftime('%Y-%m-%d'))
-        spy = yf.download('SPY', start='2020-01-01', end=datetime.today().strftime('%Y-%m-%d'))
+        bnd = pd.read_csv('../data/BND_data.csv', index_col='Date', parse_dates=True)
+        spy = pd.read_csv('../data/SPY_data.csv', index_col='Date', parse_dates=True)
         
         # Combine data
         data = tsla[['Close']].rename(columns={'Close': 'TSLA'})
@@ -35,7 +39,7 @@ def historical_data():
         logging.info("Historical data loaded successfully.")
         return data
     except Exception as e:
-        logging.error(f"Error fetching historical data: {e}")
+        logging.error(f"Error loading historical data: {e}")
         raise
 
 def forecast_prices(data, tsla_forecast):
