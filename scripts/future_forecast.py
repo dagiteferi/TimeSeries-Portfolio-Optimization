@@ -1,10 +1,8 @@
-"""
-forecast.py
-This script contains functions for forecasting Tesla stock prices using an LSTM model.
-"""
+
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
 from datetime import datetime
@@ -122,7 +120,7 @@ def plot_forecast(data, median_forecast, lower_bound, upper_bound, future_dates)
         upper_bound: 95th percentile of forecasts.
         future_dates: Dates for the forecast period.
     """
-    import matplotlib.pyplot as plt
+    
     
     plt.figure(figsize=(14, 7))
     plt.plot(data.index[-500:], data['Close'].iloc[-500:], label='Historical Prices')
