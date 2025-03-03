@@ -58,6 +58,10 @@ def load_historical_data(ticker, file_name=None, skiprows=3):
         data.reset_index(inplace=True)
         data.rename(columns={data.columns[0]: "Date"}, inplace=True)
 
+        # Ensure the Date column is a DatetimeIndex
+        data['Date'] = pd.to_datetime(data['Date'])
+        data.set_index('Date', inplace=True)
+
         logging.info(f"Successfully loaded data for {ticker} from {file_path}.")
         return data
     except Exception as e:
@@ -70,7 +74,7 @@ def forecast_prices(data, tsla_forecast):
     Forecast prices for BND and SPY using historical average returns.
     
     Args:
-        data (DataFrame): Historical prices.
+        data (DataFrame): Historical prices with a DatetimeIndex.
         tsla_forecast (array): Forecasted TSLA prices from Task 3.
     
     Returns:
@@ -78,6 +82,10 @@ def forecast_prices(data, tsla_forecast):
     """
     logging.info("Forecasting prices for BND and SPY...")
     try:
+        # Ensure the index is a DatetimeIndex
+        if not isinstance(data.index, pd.DatetimeIndex):
+            raise ValueError("The input DataFrame must have a DatetimeIndex.")
+
         # Calculate historical average daily returns
         bnd_avg_return = data['BND'].pct_change().mean()
         spy_avg_return = data['SPY'].pct_change().mean()
