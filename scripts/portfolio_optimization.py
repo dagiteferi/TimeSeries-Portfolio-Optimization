@@ -39,6 +39,10 @@ def load_historical_data(ticker):
         else:
             file_path = os.path.join(ROOT_DIR, "data", f"{ticker}_data.csv")
         
+        # Check if the file exists
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"File not found: {file_path}")
+        
         # Load the data
         data = pd.read_csv(file_path, index_col='Date', parse_dates=True)
         
