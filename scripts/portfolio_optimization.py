@@ -38,10 +38,12 @@ def historical_data():
         
         logging.info("Historical data loaded successfully.")
         return data
+    except KeyError as e:
+        logging.error(f"Error: Column 'Date' or 'Close' not found in CSV file. Please check the file structure.")
+        raise
     except Exception as e:
         logging.error(f"Error loading historical data: {e}")
         raise
-
 def forecast_prices(data, tsla_forecast):
     """
     Forecast prices for BND and SPY using historical average returns.
