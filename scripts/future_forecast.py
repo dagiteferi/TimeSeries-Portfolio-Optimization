@@ -59,7 +59,7 @@ def preprocess_data(data, look_back, test_size=0.2):
     logging.info("Data preprocessing complete.")
     return scaler, input_sequence
 
-def forecast_with_ci(model, sequence, scaler, steps=252, n_simulations=100):
+def forecast_with_ci(model, sequence, scaler, last_price, steps=252, n_simulations=100):
     """
     Generate forecasts with confidence intervals.
     
@@ -67,6 +67,7 @@ def forecast_with_ci(model, sequence, scaler, steps=252, n_simulations=100):
         model: Trained LSTM model.
         sequence: Input sequence for forecasting.
         scaler: Fitted MinMaxScaler.
+        last_price (float): Last known stock price.
         steps (int): Number of steps to forecast.
         n_simulations (int): Number of Monte Carlo simulations.
     
@@ -78,11 +79,11 @@ def forecast_with_ci(model, sequence, scaler, steps=252, n_simulations=100):
     """
     logging.info("Generating forecasts with confidence intervals...")
     forecasts = []
-    last_price = data['Close'].iloc[-1]
     
     for _ in range(n_simulations):
         current_seq = sequence.copy()
         pred_prices = []
+        current_price = last_price  # Use the provided last price
         
         for _ in range(steps):
             # Predict scaled return
@@ -92,8 +93,8 @@ def forecast_with_ci(model, sequence, scaler, steps=252, n_simulations=100):
             
             # Convert to price
             ret = scaler.inverse_transform([[scaled_return]])[0][0]
-            last_price *= (1 + ret)
-            pred_prices.append(last_price)
+            current_price *= (1 + ret)
+            pred_prices.append(current_price)
             
             # Update sequence
             current_seq = np.roll(current_seq, -1)
