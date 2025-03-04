@@ -155,27 +155,24 @@ def optimize_portfolio(forecast_df, min_allocation=0.1, concentration_penalty=0.
         raise
 
 def plot_portfolio_performance(forecast_df, optimal_weights):
-    """
-    Plot cumulative portfolio returns.
+    returns = forecast_df.pct_change().dropna()
+    portfolio_returns = returns.dot(optimal_weights)
+    cumulative_returns = (1 + portfolio_returns).cumprod()
     
-    Args:
-        forecast_df (DataFrame): Forecasted prices.
-        optimal_weights (array): Optimized portfolio weights.
-    """
-    try:
-        returns = forecast_df.pct_change().dropna()
-        portfolio_returns = returns.dot(optimal_weights)
-        cumulative_returns = (1 + portfolio_returns).cumprod()
-        
-        plt.figure(figsize=(12, 6))
-        plt.plot(cumulative_returns, label='Portfolio Cumulative Returns')
-        plt.title('Portfolio Performance Based on Forecasted Returns')
-        plt.xlabel('Date')
-        plt.ylabel('Cumulative Returns')
-        plt.legend()
-        plt.grid(True)
-        plt.show()
-    except Exception as e:
-        logging.error(f"Error plotting portfolio performance: {e}")
-        raise
+    # Calculate cumulative returns for individual assets
+    tsla_cumulative = (1 + returns['TSLA']).cumprod()
+    bnd_cumulative = (1 + returns['BND']).cumprod()
+    spy_cumulative = (1 + returns['SPY']).cumprod()
+    
+    plt.figure(figsize=(12, 6))
+    plt.plot(cumulative_returns, label='Portfolio Cumulative Returns', linewidth=2)
+    plt.plot(tsla_cumulative, label='TSLA Cumulative Returns', linestyle='--', alpha=0.5)
+    plt.plot(bnd_cumulative, label='BND Cumulative Returns', linestyle='--', alpha=0.5)
+    plt.plot(spy_cumulative, label='SPY Cumulative Returns', linestyle='--', alpha=0.5)
+    plt.title('Portfolio and Asset Performance Based on Forecasted Returns')
+    plt.xlabel('Date')
+    plt.ylabel('Cumulative Returns')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
 
