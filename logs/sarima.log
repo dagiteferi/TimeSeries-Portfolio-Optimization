@@ -1,0 +1,2 @@
+2025-03-01 22:32:40,145 - INFO - SARIMA Forecasting Pipeline Started
+2025-03-01 22:32:40,147 - ERROR - Main execution failed: [Errno 2] No such file or directory: 'TSLA_cleaned.csv'
