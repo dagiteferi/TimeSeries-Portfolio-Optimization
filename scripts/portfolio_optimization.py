@@ -173,55 +173,7 @@ def optimize_portfolio(forecast_df, min_allocation=0.1):
         logging.error(f"Error optimizing portfolio: {e}")
         raise
 
-def minimize_volatility(forecast_df):
-    """
-    Optimize portfolio weights to minimize volatility.
-    
-    Args:
-        forecast_df (DataFrame): Forecasted prices for all assets.
-    
-    Returns:
-        optimal_weights (array): Optimized portfolio weights.
-        portfolio_return (float): Expected annual return.
-        portfolio_volatility (float): Annual volatility.
-    """
-    logging.info("Optimizing portfolio weights to minimize volatility...")
-    try:
-        # Calculate daily returns
-        returns = forecast_df.pct_change().dropna()
-        
-        # Annualized covariance matrix
-        cov_matrix = returns.cov() * 252
-        
-        # Define portfolio volatility
-        def portfolio_volatility(weights, cov_matrix):
-            return np.sqrt(np.dot(weights.T, np.dot(cov_matrix, weights)))
-        
-        # Constraints and bounds
-        constraints = ({'type': 'eq', 'fun': lambda x: np.sum(x) - 1})
-        bounds = tuple((0, 1) for _ in range(3))
-        initial_guess = [0.33, 0.33, 0.33]
-        
-        # Optimize
-        result = minimize(
-            portfolio_volatility,
-            initial_guess,
-            args=(cov_matrix),
-            method='SLSQP',
-            bounds=bounds,
-            constraints=constraints
-        )
-        optimal_weights = result.x
-        
-        # Portfolio metrics
-        portfolio_return = np.dot(optimal_weights, returns.mean() * 252)
-        portfolio_volatility = portfolio_volatility(optimal_weights, cov_matrix)
-        
-        logging.info("Portfolio optimization complete.")
-        return optimal_weights, portfolio_return, portfolio_volatility
-    except Exception as e:
-        logging.error(f"Error optimizing portfolio: {e}")
-        raise
+
 
 def plot_portfolio_performance(forecast_df, optimal_weights):
     """
