@@ -1,1 +1,7 @@
 yfinance
+pandas
+scikit-learn
+matplotlib
+statsmodels
+pmdarima
+tensorflow

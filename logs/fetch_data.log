@@ -1,0 +1,9 @@
+2025-02-26 21:54:20,523 - INFO - Fetching data for TSLA...
+2025-02-26 21:54:30,457 - INFO - Successfully fetched data for TSLA.
+2025-02-26 21:54:30,506 - INFO - Data for TSLA saved to C:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-26 21:54:30,506 - INFO - Fetching data for BND...
+2025-02-26 21:54:31,350 - INFO - Successfully fetched data for BND.
+2025-02-26 21:54:31,417 - INFO - Data for BND saved to C:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
+2025-02-26 21:54:31,417 - INFO - Fetching data for SPY...
+2025-02-26 21:54:32,420 - INFO - Successfully fetched data for SPY.
+2025-02-26 21:54:32,577 - INFO - Data for SPY saved to C:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.

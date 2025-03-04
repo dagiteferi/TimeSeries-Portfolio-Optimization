@@ -1,0 +1,489 @@
+2025-02-27 10:36:11,663 - INFO - Loading data for TSLA...
+2025-02-27 10:36:11,674 - ERROR - Error loading data for TSLA: 'Date' is not in list
+2025-02-27 10:36:11,676 - INFO - Loading data for BND...
+2025-02-27 10:36:11,709 - ERROR - Error loading data for BND: 'Date' is not in list
+2025-02-27 10:36:11,710 - INFO - Loading data for SPY...
+2025-02-27 10:36:11,746 - ERROR - Error loading data for SPY: 'Date' is not in list
+2025-02-27 11:27:12,756 - INFO - Loading data for TSLA...
+2025-02-27 11:27:12,762 - ERROR - Error loading data for TSLA: [Errno 2] No such file or directory: 'c:\\Users\\HP\\Documents\\Dagii\\week-11\\TimeSeries-Portfolio-Optimization\\../data\\TSLA_data.csv'
+2025-02-27 11:27:12,764 - INFO - Loading data for BND...
+2025-02-27 11:27:12,766 - ERROR - Error loading data for BND: [Errno 2] No such file or directory: 'c:\\Users\\HP\\Documents\\Dagii\\week-11\\TimeSeries-Portfolio-Optimization\\../data\\BND_data.csv'
+2025-02-27 11:27:12,768 - INFO - Loading data for SPY...
+2025-02-27 11:27:12,771 - ERROR - Error loading data for SPY: [Errno 2] No such file or directory: 'c:\\Users\\HP\\Documents\\Dagii\\week-11\\TimeSeries-Portfolio-Optimization\\../data\\SPY_data.csv'
+2025-02-27 11:27:41,247 - INFO - Loading data for TSLA...
+2025-02-27 11:27:41,285 - ERROR - Error loading data for TSLA: 'Date' column is missing in the data file.
+2025-02-27 11:27:41,287 - INFO - Loading data for BND...
+2025-02-27 11:27:41,309 - ERROR - Error loading data for BND: 'Date' column is missing in the data file.
+2025-02-27 11:27:41,311 - INFO - Loading data for SPY...
+2025-02-27 11:27:41,326 - ERROR - Error loading data for SPY: 'Date' column is missing in the data file.
+2025-02-27 11:48:39,146 - INFO - Loading data for TSLA...
+2025-02-27 11:48:39,161 - ERROR - Error loading data for TSLA: 'Date' is not in list
+2025-02-27 11:50:04,659 - INFO - Loading data for TSLA...
+2025-02-27 11:50:04,687 - INFO - Columns found in CSV: ['Price', 'Close', 'High', 'Low', 'Open', 'Volume']
+2025-02-27 11:50:04,690 - ERROR - Error: 'Date' column not found in c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv
+2025-02-27 11:54:43,370 - INFO - Loading data for TSLA...
+2025-02-27 11:54:43,401 - ERROR - Error loading data for TSLA: Length mismatch: Expected axis has 5 elements, new values have 6 elements
+2025-02-27 11:57:56,496 - INFO - Loading data for TSLA...
+2025-02-27 11:57:56,507 - ERROR - Error loading data for TSLA: 'Date' is not in list
+2025-02-27 12:01:41,922 - INFO - Loading data for TSLA...
+2025-02-27 12:01:41,943 - INFO - Columns found in CSV: ['2015-01-02', '14.620667457580566', '14.883333206176758', '14.21733283996582', '14.857999801635742', '71466000']
+2025-02-27 12:01:41,944 - ERROR - Error loading data for TSLA: "None of ['Date'] are in the columns"
+2025-02-27 12:03:34,171 - INFO - Loading data for TSLA...
+2025-02-27 12:03:34,200 - INFO - Columns found in CSV: [0, 1, 2, 3, 4, 5]
+2025-02-27 12:03:34,202 - ERROR - Error loading data for TSLA: Length mismatch: Expected axis has 6 elements, new values have 7 elements
+2025-02-27 12:05:29,433 - INFO - Loading data for TSLA...
+2025-02-27 12:05:29,503 - INFO - Columns found in CSV: [0, 1, 2, 3, 4, 5, 6]
+2025-02-27 12:05:29,509 - ERROR - Error loading data for TSLA: Unknown datetime string format, unable to parse: Date, at position 0
+2025-02-27 12:08:31,467 - INFO - Loading data for TSLA...
+2025-02-27 12:08:31,513 - ERROR - Error loading data for TSLA: Length mismatch: Expected axis has 5 elements, new values have 6 elements
+2025-02-27 12:17:29,157 - INFO - Loading data for TSLA...
+2025-02-27 12:17:29,182 - ERROR - Error loading data for TSLA: Length mismatch: Expected axis has 5 elements, new values have 6 elements
+2025-02-27 12:18:13,231 - INFO - Loading data for TSLA...
+2025-02-27 12:18:13,265 - INFO - Columns found in CSV: ['Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5']
+2025-02-27 12:18:13,268 - ERROR - Length mismatch: Expected 6 columns, but got 5.
+2025-02-27 12:18:44,991 - INFO - Loading data for TSLA...
+2025-02-27 12:18:45,020 - INFO - Columns found in CSV: ['Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5']
+2025-02-27 12:18:45,021 - ERROR - Length mismatch: Expected 6 columns, but got 5.
+2025-02-27 12:19:52,933 - INFO - Loading data for TSLA...
+2025-02-27 12:19:52,957 - ERROR - Error loading data for TSLA: Length mismatch: Expected axis has 6 elements, new values have 7 elements
+2025-02-27 12:20:38,528 - INFO - Loading data for TSLA...
+2025-02-27 12:20:38,551 - ERROR - Error loading data for TSLA: Length mismatch: Expected axis has 6 elements, new values have 7 elements
+2025-02-27 12:23:23,940 - INFO - Loading data for TSLA...
+2025-02-27 12:23:23,975 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-27 12:24:07,340 - INFO - Loading data for TSLA...
+2025-02-27 12:24:07,361 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-27 12:26:43,772 - INFO - Loading data for TSLA...
+2025-02-27 12:26:43,797 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-27 12:26:43,800 - INFO - Loading data for SPY...
+2025-02-27 12:26:43,825 - INFO - Successfully loaded data for SPY from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
+2025-02-27 12:26:43,826 - INFO - Loading data for BND...
+2025-02-27 12:26:43,853 - INFO - Successfully loaded data for BND from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
+2025-02-27 12:27:19,936 - INFO - Loading data for TSLA...
+2025-02-27 12:27:19,966 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-27 12:27:19,968 - INFO - Loading data for SPY...
+2025-02-27 12:27:20,001 - INFO - Successfully loaded data for SPY from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
+2025-02-27 12:27:20,003 - INFO - Loading data for BND...
+2025-02-27 12:27:20,027 - INFO - Successfully loaded data for BND from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
+2025-02-27 12:27:34,584 - INFO - Loading data for SPY...
+2025-02-27 12:27:34,605 - INFO - Successfully loaded data for SPY from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
+2025-02-27 12:29:03,252 - INFO - Loading data for TSLA...
+2025-02-27 12:29:03,278 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-27 12:29:26,246 - INFO - Loading data for TSLA...
+2025-02-27 12:29:26,270 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-27 12:29:26,271 - INFO - Loading data for BND...
+2025-02-27 12:29:26,293 - INFO - Successfully loaded data for BND from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
+2025-02-27 12:30:00,493 - INFO - Loading data for BND...
+2025-02-27 12:30:00,521 - INFO - Successfully loaded data for BND from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
+2025-02-27 12:30:00,522 - INFO - Loading data for SPY...
+2025-02-27 12:30:00,553 - INFO - Successfully loaded data for SPY from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
+2025-02-27 12:30:00,554 - INFO - Loading data for TSLA...
+2025-02-27 12:30:00,575 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-27 12:30:55,340 - INFO - Basic statistics for TSLA:
+2025-02-27 12:30:55,358 - INFO -              Price        Close         High          Low        Volume
+count  2534.000000  2534.000000  2534.000000  2534.000000  2.534000e+03
+mean    117.888946   120.516497   115.137325   117.918317  1.120468e+08
+std     116.513225   119.241096   113.703698   116.616621  7.388527e+07
+min       9.578000    10.331333     9.403333     9.488000  1.062000e+07
+25%      17.246000    17.530834    16.943500    17.269167  6.679792e+07
+50%      30.784333    32.640001    29.992001    31.440000  9.264390e+07
+75%     221.622501   226.718338   217.090828   222.661667  1.294490e+08
+max     479.859985   488.540009   457.510010   475.899994  9.140820e+08
+2025-02-27 12:32:13,641 - INFO - Data types before cleaning for TSLA:
+2025-02-27 12:32:13,643 - INFO - Price     float64
+Close     float64
+High      float64
+Low       float64
+Volume      int64
+dtype: object
+2025-02-27 12:32:13,647 - INFO - Data types after cleaning for TSLA:
+2025-02-27 12:32:13,649 - INFO - Price     float64
+Close     float64
+High      float64
+Low       float64
+Volume      int64
+dtype: object
+2025-02-27 12:32:21,631 - INFO - Missing values for TSLA:
+2025-02-27 12:32:21,636 - INFO - Price     0
+Close     0
+High      0
+Low       0
+Volume    0
+dtype: int64
+2025-02-27 12:38:06,481 - INFO - Loading data for BND...
+2025-02-27 12:38:06,509 - INFO - Successfully loaded data for BND from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\BND_data.csv.
+2025-02-27 12:38:06,511 - INFO - Loading data for SPY...
+2025-02-27 12:38:06,536 - INFO - Successfully loaded data for SPY from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\SPY_data.csv.
+2025-02-27 12:38:06,538 - INFO - Loading data for TSLA...
+2025-02-27 12:38:06,562 - INFO - Successfully loaded data for TSLA from c:\Users\HP\Documents\Dagii\week-11\TimeSeries-Portfolio-Optimization\data\TSLA_data.csv.
+2025-02-27 12:39:40,718 - INFO - Basic statistics for TSLA:
+2025-02-27 12:39:40,746 - INFO -                                 Date        Price        Close         High  \
+count                           2534  2534.000000  2534.000000  2534.000000   
+mean   2020-01-15 07:57:20.883977984   117.888946   120.516497   115.137325   
+min              2015-01-05 00:00:00     9.578000    10.331333     9.403333   
+25%              2017-07-11 06:00:00    17.246000    17.530834    16.943500   
+50%              2020-01-15 12:00:00    30.784333    32.640001    29.992001   
+75%              2022-07-21 18:00:00   221.622501   226.718338   217.090828   
+max              2025-01-30 00:00:00   479.859985   488.540009   457.510010   
+std                              NaN   116.513225   119.241096   113.703698   
+
+               Low        Volume  
+count  2534.000000  2.534000e+03  
+mean    117.918317  1.120468e+08  
+min       9.488000  1.062000e+07  
+25%      17.269167  6.679792e+07  
+50%      31.440000  9.264390e+07  
+75%     222.661667  1.294490e+08  
+max     475.899994  9.140820e+08  
+std     116.616621  7.388527e+07  
+2025-02-27 12:51:34,034 - INFO - Basic statistics for TSLA:
+2025-02-27 12:51:34,062 - INFO -                                 Date        Price        Close         High  \
+count                           2534  2534.000000  2534.000000  2534.000000   
+mean   2020-01-15 07:57:20.883977984   117.888946   120.516497   115.137325   
+min              2015-01-05 00:00:00     9.578000    10.331333     9.403333   
+25%              2017-07-11 06:00:00    17.246000    17.530834    16.943500   
+50%              2020-01-15 12:00:00    30.784333    32.640001    29.992001   
+75%              2022-07-21 18:00:00   221.622501   226.718338   217.090828   
+max              2025-01-30 00:00:00   479.859985   488.540009   457.510010   
+std                              NaN   116.513225   119.241096   113.703698   
+
+               Low        Volume  
+count  2534.000000  2.534000e+03  
+mean    117.918317  1.120468e+08  
+min       9.488000  1.062000e+07  
+25%      17.269167  6.679792e+07  
+50%      31.440000  9.264390e+07  
+75%     222.661667  1.294490e+08  
+max     475.899994  9.140820e+08  
+std     116.616621  7.388527e+07  
+2025-02-27 12:51:50,918 - INFO - Basic statistics for TSLA:
+2025-02-27 12:51:50,937 - INFO -                                 Date        Price        Close         High  \
+count                           2534  2534.000000  2534.000000  2534.000000   
+mean   2020-01-15 07:57:20.883977984   117.888946   120.516497   115.137325   
+min              2015-01-05 00:00:00     9.578000    10.331333     9.403333   
+25%              2017-07-11 06:00:00    17.246000    17.530834    16.943500   
+50%              2020-01-15 12:00:00    30.784333    32.640001    29.992001   
+75%              2022-07-21 18:00:00   221.622501   226.718338   217.090828   
+max              2025-01-30 00:00:00   479.859985   488.540009   457.510010   
+std                              NaN   116.513225   119.241096   113.703698   
+
+               Low        Volume  
+count  2534.000000  2.534000e+03  
+mean    117.918317  1.120468e+08  
+min       9.488000  1.062000e+07  
+25%      17.269167  6.679792e+07  
+50%      31.440000  9.264390e+07  
+75%     222.661667  1.294490e+08  
+max     475.899994  9.140820e+08  
+std     116.616621  7.388527e+07  
+2025-02-27 12:51:52,349 - INFO - Basic statistics for TSLA:
+2025-02-27 12:51:52,371 - INFO -                                 Date        Price        Close         High  \
+count                           2534  2534.000000  2534.000000  2534.000000   
+mean   2020-01-15 07:57:20.883977984   117.888946   120.516497   115.137325   
+min              2015-01-05 00:00:00     9.578000    10.331333     9.403333   
+25%              2017-07-11 06:00:00    17.246000    17.530834    16.943500   
+50%              2020-01-15 12:00:00    30.784333    32.640001    29.992001   
+75%              2022-07-21 18:00:00   221.622501   226.718338   217.090828   
+max              2025-01-30 00:00:00   479.859985   488.540009   457.510010   
+std                              NaN   116.513225   119.241096   113.703698   
+
+               Low        Volume  
+count  2534.000000  2.534000e+03  
+mean    117.918317  1.120468e+08  
+min       9.488000  1.062000e+07  
+25%      17.269167  6.679792e+07  
+50%      31.440000  9.264390e+07  
+75%     222.661667  1.294490e+08  
+max     475.899994  9.140820e+08  
+std     116.616621  7.388527e+07  
+2025-02-27 12:51:53,552 - INFO - Basic statistics for TSLA:
+2025-02-27 12:51:53,574 - INFO -                                 Date        Price        Close         High  \
+count                           2534  2534.000000  2534.000000  2534.000000   
+mean   2020-01-15 07:57:20.883977984   117.888946   120.516497   115.137325   
+min              2015-01-05 00:00:00     9.578000    10.331333     9.403333   
+25%              2017-07-11 06:00:00    17.246000    17.530834    16.943500   
+50%              2020-01-15 12:00:00    30.784333    32.640001    29.992001   
+75%              2022-07-21 18:00:00   221.622501   226.718338   217.090828   
+max              2025-01-30 00:00:00   479.859985   488.540009   457.510010   
+std                              NaN   116.513225   119.241096   113.703698   
+
+               Low        Volume  
+count  2534.000000  2.534000e+03  
+mean    117.918317  1.120468e+08  
+min       9.488000  1.062000e+07  
+25%      17.269167  6.679792e+07  
+50%      31.440000  9.264390e+07  
+75%     222.661667  1.294490e+08  
+max     475.899994  9.140820e+08  
+std     116.616621  7.388527e+07  
+2025-02-27 12:51:55,048 - INFO - Basic statistics for TSLA:
+2025-02-27 12:51:55,071 - INFO -                                 Date        Price        Close         High  \
+count                           2534  2534.000000  2534.000000  2534.000000   
+mean   2020-01-15 07:57:20.883977984   117.888946   120.516497   115.137325   
+min              2015-01-05 00:00:00     9.578000    10.331333     9.403333   
+25%              2017-07-11 06:00:00    17.246000    17.530834    16.943500   
+50%              2020-01-15 12:00:00    30.784333    32.640001    29.992001   
+75%              2022-07-21 18:00:00   221.622501   226.718338   217.090828   
+max              2025-01-30 00:00:00   479.859985   488.540009   457.510010   
+std                              NaN   116.513225   119.241096   113.703698   
+
+               Low        Volume  
+count  2534.000000  2.534000e+03  
+mean    117.918317  1.120468e+08  
+min       9.488000  1.062000e+07  
+25%      17.269167  6.679792e+07  
+50%      31.440000  9.264390e+07  
+75%     222.661667  1.294490e+08  
+max     475.899994  9.140820e+08  
+std     116.616621  7.388527e+07  
+2025-02-28 13:36:24,454 - INFO - Loading TSLA data from CSV...
+2025-02-28 13:36:24,458 - ERROR - Error loading TSLA data: [Errno 2] No such file or directory: 'data/TSLA_cleaned.csv'
+2025-02-28 13:36:55,937 - INFO - Loading TSLA data from CSV...
+2025-02-28 13:36:55,939 - ERROR - Error loading TSLA data: [Errno 2] No such file or directory: 'TSLA_cleaned.csv'
+2025-02-28 13:37:18,164 - INFO - Loading TSLA data from CSV...
+2025-02-28 13:37:18,199 - INFO - Verifying TSLA data integrity...
+2025-02-28 13:37:18,203 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 20:59:23,777 - INFO - Loading TSLA data from CSV...
+2025-03-01 20:59:23,842 - INFO - Verifying TSLA data integrity...
+2025-03-01 20:59:23,845 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:14:13,736 - INFO - Loading TSLA data from CSV...
+2025-03-01 21:14:13,802 - INFO - Verifying TSLA data integrity...
+2025-03-01 21:14:13,818 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:17:54,054 - INFO - Loading TSLA data from CSV...
+2025-03-01 21:17:54,085 - INFO - Verifying TSLA data integrity...
+2025-03-01 21:17:54,089 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:20:04,775 - INFO - Loading TSLA data from CSV...
+2025-03-01 21:20:04,812 - INFO - Verifying TSLA data integrity...
+2025-03-01 21:20:04,816 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:24:57,150 - INFO - Loading TSLA data from CSV...
+2025-03-01 21:24:57,181 - INFO - Verifying TSLA data integrity...
+2025-03-01 21:24:57,184 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:26:44,835 - INFO - Loading TSLA data from CSV...
+2025-03-01 21:26:44,850 - INFO - Verifying TSLA data integrity...
+2025-03-01 21:26:44,862 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:29:43,865 - INFO - Loading TSLA data from CSV...
+2025-03-01 21:29:43,900 - INFO - Verifying TSLA data integrity...
+2025-03-01 21:29:43,907 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:29:43,965 - INFO - Starting ARIMA model training on TSLA Close price data.
+2025-03-01 21:29:43,969 - INFO - Using date-based split for training up to 2024-12-31. Training data size: 2485 rows.
+2025-03-01 21:29:43,971 - INFO - Optimizing ARIMA parameters with auto_arima (seasonal=False, max_p=3, max_q=3)...
+2025-03-01 21:29:51,501 - INFO - Best ARIMA parameters found: (0, 1, 3)
+2025-03-01 21:29:51,516 - INFO - Forecasting 19 steps starting from 2025-01-01 with ARIMA model...
+2025-03-01 21:29:51,532 - INFO - ARIMA forecast completed successfully with datetime index.
+2025-03-01 21:29:51,547 - INFO - Evaluating ARIMA model performance with MAE, RMSE, and MAPE...
+2025-03-01 21:29:51,552 - ERROR - Error evaluating ARIMA: Input contains NaN.
+2025-03-01 21:44:40,597 - INFO - Loading TSLA data from CSV...
+2025-03-01 21:44:40,627 - INFO - Verifying TSLA data integrity...
+2025-03-01 21:44:40,630 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:44:40,789 - INFO - Starting ARIMA model training
+2025-03-01 21:44:40,840 - INFO - Training period: 2015-02-17 to 2024-12-30
+2025-03-01 21:44:50,578 - INFO - Best ARIMA parameters: (0, 1, 2)
+2025-03-01 21:44:50,789 - ERROR - Evaluation failed: Input contains NaN.
+2025-03-01 21:47:50,414 - INFO - Loading TSLA data from CSV...
+2025-03-01 21:47:50,438 - INFO - Verifying TSLA data integrity...
+2025-03-01 21:47:50,442 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:47:50,490 - INFO - Starting ARIMA model training on TSLA Close price data.
+2025-03-01 21:47:50,494 - INFO - Using date-based split for training up to 2024-12-31. Training data size: 2485 rows.
+2025-03-01 21:47:50,733 - INFO - ADF Test - Statistic: -0.48253008917673196, p-value: 0.8953807822820801
+2025-03-01 21:47:50,735 - WARNING - Data appears non-stationary (p-value > 0.05). Applying differencing with d=1.
+2025-03-01 21:47:50,739 - INFO - Optimizing ARIMA parameters with auto_arima (seasonal=False, max_p=3, max_q=3)...
+2025-03-01 21:47:53,633 - INFO - Best ARIMA parameters found: (0, 0, 3)
+2025-03-01 21:47:53,654 - INFO - Forecasting 19 steps starting from 2025-01-01 with ARIMA model...
+2025-03-01 21:47:53,665 - WARNING - Forecast contains NaN values. Checking model and data...
+2025-03-01 21:47:53,666 - ERROR - Error forecasting with ARIMA: Forecast contains NaN values; check model training or data stationarity.
+2025-03-01 21:51:04,044 - INFO - Loading TSLA data from CSV...
+2025-03-01 21:51:04,074 - INFO - Verifying TSLA data integrity...
+2025-03-01 21:51:04,078 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:51:56,573 - INFO - Starting ARIMA model training on TSLA Close price data.
+2025-03-01 21:51:56,576 - INFO - Using date-based split for training up to 2024-12-31. Training data size: 2485 rows.
+2025-03-01 21:51:56,846 - INFO - ADF Test - Statistic: -0.48253008917673196, p-value: 0.8953807822820801
+2025-03-01 21:51:56,849 - WARNING - Data appears non-stationary (p-value > 0.05). Applying differencing with d=1.
+2025-03-01 21:51:56,850 - INFO - Optimizing ARIMA parameters with auto_arima (seasonal=False, max_p=3, max_q=3)...
+2025-03-01 21:51:59,871 - INFO - Best ARIMA parameters found: (0, 0, 3)
+2025-03-01 21:52:03,076 - INFO - Forecasting 19 steps starting from 2025-01-01 with ARIMA model...
+2025-03-01 21:52:03,086 - WARNING - Forecast contains NaN values. Checking model and data...
+2025-03-01 21:52:03,087 - ERROR - Error forecasting with ARIMA: Forecast contains NaN values; check model training or data stationarity.
+2025-03-01 21:56:53,374 - INFO - Loading TSLA data from CSV...
+2025-03-01 21:56:53,403 - INFO - Verifying TSLA data integrity...
+2025-03-01 21:56:53,405 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 21:57:44,263 - INFO - Starting ARIMA model training
+2025-03-01 21:57:44,345 - INFO - Training period: 2015-02-17 to 2024-12-31
+2025-03-01 21:57:55,199 - INFO - Best ARIMA parameters: (0, 1, 2)
+2025-03-01 21:57:55,217 - INFO - Model summary:
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                      y   No. Observations:                 2576
+Model:               SARIMAX(0, 1, 2)   Log Likelihood               -8027.083
+Date:                Sat, 01 Mar 2025   AIC                          16060.166
+Time:                        21:57:55   BIC                          16077.727
+Sample:                    02-17-2015   HQIC                         16066.532
+                         - 12-31-2024                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ma.L1          0.1810      0.012     14.930      0.000       0.157       0.205
+ma.L2         -0.0314      0.011     -2.770      0.006      -0.054      -0.009
+sigma2        29.8661      0.329     90.696      0.000      29.221      30.512
+===================================================================================
+Ljung-Box (L1) (Q):                   0.00   Jarque-Bera (JB):             12732.95
+Prob(Q):                              1.00   Prob(JB):                         0.00
+Heteroskedasticity (H):             506.10   Skew:                             0.69
+Prob(H) (two-sided):                  0.00   Kurtosis:                        13.81
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+2025-03-01 21:58:13,939 - INFO - Starting ARIMA model training
+2025-03-01 21:58:14,088 - INFO - Training period: 2015-02-17 to 2024-12-31
+2025-03-01 21:58:24,465 - INFO - Best ARIMA parameters: (0, 1, 2)
+2025-03-01 21:58:24,471 - INFO - Model summary:
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                      y   No. Observations:                 2576
+Model:               SARIMAX(0, 1, 2)   Log Likelihood               -8027.083
+Date:                Sat, 01 Mar 2025   AIC                          16060.166
+Time:                        21:58:24   BIC                          16077.727
+Sample:                    02-17-2015   HQIC                         16066.532
+                         - 12-31-2024                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ma.L1          0.1810      0.012     14.930      0.000       0.157       0.205
+ma.L2         -0.0314      0.011     -2.770      0.006      -0.054      -0.009
+sigma2        29.8661      0.329     90.696      0.000      29.221      30.512
+===================================================================================
+Ljung-Box (L1) (Q):                   0.00   Jarque-Bera (JB):             12732.95
+Prob(Q):                              1.00   Prob(JB):                         0.00
+Heteroskedasticity (H):             506.10   Skew:                             0.69
+Prob(H) (two-sided):                  0.00   Kurtosis:                        13.81
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+2025-03-01 22:01:30,953 - INFO - Loading TSLA data from CSV...
+2025-03-01 22:01:30,985 - INFO - Verifying TSLA data integrity...
+2025-03-01 22:01:30,990 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 22:01:36,806 - INFO - Starting ARIMA model training
+2025-03-01 22:01:36,865 - INFO - Training period: 2015-02-17 to 2024-12-31
+2025-03-01 22:01:46,470 - INFO - Best ARIMA parameters: (0, 1, 2)
+2025-03-01 22:03:02,775 - INFO - Forecasting 22 steps
+2025-03-01 22:03:02,893 - INFO - Forecast completed successfully
+2025-03-01 22:03:29,355 - INFO - MAE: 15.31, RMSE: 18.87, MAPE: 3.76%
+2025-03-01 22:03:43,546 - INFO - MAE: 15.31, RMSE: 18.87, MAPE: 3.76%
+2025-03-01 22:16:37,524 - INFO - Loading TSLA data from CSV...
+2025-03-01 22:16:37,622 - INFO - Verifying TSLA data integrity...
+2025-03-01 22:16:37,625 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 22:18:38,294 - INFO - Loading TSLA data from CSV...
+2025-03-01 22:18:38,320 - INFO - Verifying TSLA data integrity...
+2025-03-01 22:18:38,326 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 22:19:20,732 - INFO - Loading TSLA data from CSV...
+2025-03-01 22:19:20,756 - INFO - Verifying TSLA data integrity...
+2025-03-01 22:19:20,759 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 22:19:33,012 - INFO - Preprocessing data - converting to business day frequency
+2025-03-01 22:19:33,100 - INFO - New date range: 2015-02-17 00:00:00 to 2025-01-30 00:00:00
+2025-03-01 22:20:06,826 - INFO - Starting SARIMA model training
+2025-03-01 22:20:06,831 - INFO - Training period: 2015-02-17 to 2024-12-31
+2025-03-01 22:20:06,832 - INFO - Training samples: 2576
+2025-03-01 22:20:06,837 - INFO - Performing seasonal decomposition
+2025-03-01 22:20:07,722 - INFO - Seasonal strength: 8.09%
+2025-03-01 22:20:07,744 - INFO - Optimizing SARIMA parameters with seasonal_period=63
+2025-03-01 22:25:09,125 - INFO - Best SARIMA parameters: (0, 1, 2)(0, 0, 0, 63)
+2025-03-01 22:25:09,284 - INFO - Model summary:
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                      y   No. Observations:                 2576
+Model:               SARIMAX(0, 1, 2)   Log Likelihood               -8027.083
+Date:                Sat, 01 Mar 2025   AIC                          16060.166
+Time:                        22:25:09   BIC                          16077.727
+Sample:                    02-17-2015   HQIC                         16066.532
+                         - 12-31-2024                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ma.L1          0.1810      0.012     14.930      0.000       0.157       0.205
+ma.L2         -0.0314      0.011     -2.770      0.006      -0.054      -0.009
+sigma2        29.8661      0.329     90.696      0.000      29.221      30.512
+===================================================================================
+Ljung-Box (L1) (Q):                   0.00   Jarque-Bera (JB):             12732.95
+Prob(Q):                              1.00   Prob(JB):                         0.00
+Heteroskedasticity (H):             506.10   Skew:                             0.69
+Prob(H) (two-sided):                  0.00   Kurtosis:                        13.81
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+2025-03-01 22:25:09,448 - INFO - Generating 22-step forecast
+2025-03-01 22:25:09,560 - INFO - Forecast completed successfully
+2025-03-01 22:25:09,578 - INFO - Evaluating SARIMA model performance
+2025-03-01 22:25:09,603 - INFO - SARIMA Evaluation - MAE: 15.31, RMSE: 18.87, MAPE: 3.76%
+2025-03-01 22:25:09,623 - INFO - Generating SARIMA results plot
+2025-03-01 22:25:10,007 - INFO - Plot generated successfully
+2025-03-01 22:38:08,965 - INFO - Loading TSLA data from CSV...
+2025-03-01 22:38:09,083 - INFO - Verifying TSLA data integrity...
+2025-03-01 22:38:09,086 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 22:46:03,857 - INFO - Loading TSLA data from CSV...
+2025-03-01 22:46:03,889 - INFO - Verifying TSLA data integrity...
+2025-03-01 22:46:03,893 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 22:46:18,637 - INFO - Preprocessing data for LSTM
+2025-03-01 22:46:18,650 - INFO - Created 2018 sequences with 60 time steps
+2025-03-01 22:46:18,653 - INFO - Building LSTM model
+2025-03-01 22:46:19,000 - INFO - Model summary:
+None
+2025-03-01 22:46:19,003 - INFO - Starting model training
+2025-03-01 22:49:43,350 - INFO - Training stopped at epoch 64
+2025-03-01 22:49:43,367 - INFO - Generating forecasts
+2025-03-01 22:55:33,508 - INFO - Generated 2018 forecasts
+2025-03-01 22:55:33,529 - INFO - Evaluating LSTM performance
+2025-03-01 22:55:33,541 - INFO - LSTM Evaluation - MAE: 296.10, RMSE: 303.87, MAPE: 124.45%
+2025-03-01 22:55:33,543 - INFO - Generating results plot
+2025-03-01 22:55:33,954 - INFO - Plot generated successfully
+2025-03-01 23:17:26,119 - INFO - Loading TSLA data from CSV...
+2025-03-01 23:17:26,153 - INFO - Verifying TSLA data integrity...
+2025-03-01 23:17:26,154 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 23:18:26,749 - INFO - Starting data preprocessing
+2025-03-01 23:18:26,751 - ERROR - Data preprocessing failed: argument of type 'method' is not iterable
+2025-03-01 23:23:35,109 - INFO - Loading TSLA data from CSV...
+2025-03-01 23:23:35,133 - INFO - Verifying TSLA data integrity...
+2025-03-01 23:23:35,136 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-01 23:23:52,534 - INFO - Starting data preprocessing
+2025-03-01 23:23:52,574 - INFO - Original data range: 2015-02-17 00:00:00 to 2025-01-30 00:00:00
+2025-03-01 23:23:52,587 - INFO - Training sequences: 2018
+2025-03-01 23:23:52,588 - INFO - Test sequences: 460
+2025-03-01 23:24:09,394 - INFO - Building LSTM model
+2025-03-01 23:24:09,599 - INFO - Model summary:
+None
+2025-03-01 23:24:14,547 - INFO - Building LSTM model
+2025-03-01 23:24:14,617 - INFO - Model summary:
+None
+2025-03-01 23:24:22,249 - INFO - Building LSTM model
+2025-03-01 23:24:22,321 - INFO - Model summary:
+None
+2025-03-01 23:24:57,759 - INFO - Starting model training
+2025-03-03 09:34:41,554 - INFO - Loading TSLA data from CSV...
+2025-03-03 09:34:41,560 - ERROR - Error loading TSLA data: [Errno 2] No such file or directory: 'data/TSLA_cleaned.csv'
+2025-03-03 09:35:44,504 - INFO - Loading TSLA data from CSV...
+2025-03-03 09:35:44,585 - INFO - Verifying TSLA data integrity...
+2025-03-03 09:35:44,589 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-03 09:36:00,793 - INFO - Loading TSLA data from CSV...
+2025-03-03 09:36:00,818 - INFO - Verifying TSLA data integrity...
+2025-03-03 09:36:00,823 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-03 09:36:13,857 - INFO - Loading TSLA data from CSV...
+2025-03-03 09:36:13,884 - INFO - Verifying TSLA data integrity...
+2025-03-03 09:36:13,887 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-03 09:39:15,011 - INFO - Loading TSLA data from CSV...
+2025-03-03 09:39:15,041 - INFO - Verifying TSLA data integrity...
+2025-03-03 09:39:15,047 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-03 09:39:39,848 - INFO - Loading TSLA data from CSV...
+2025-03-03 09:39:39,889 - INFO - Verifying TSLA data integrity...
+2025-03-03 09:39:39,895 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-03 09:49:30,997 - INFO - Loading TSLA data from CSV...
+2025-03-03 09:49:31,027 - INFO - Verifying TSLA data integrity...
+2025-03-03 09:49:31,029 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-03 09:49:38,427 - INFO - Loading TSLA data from CSV...
+2025-03-03 09:49:38,452 - INFO - Verifying TSLA data integrity...
+2025-03-03 09:49:38,454 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
+2025-03-03 10:09:55,219 - INFO - Loading TSLA data from CSV...
+2025-03-03 10:09:55,245 - INFO - Verifying TSLA data integrity...
+2025-03-03 10:09:55,250 - INFO - TSLA data loaded successfully. Shape: (2505, 9), Missing values: 0
