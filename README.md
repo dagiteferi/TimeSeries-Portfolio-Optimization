@@ -36,7 +36,47 @@ This project focuses on leveraging **time series forecasting** and **portfolio o
 
 ## 📂 Repository Structure
 ```bash
-  ----------------------
+  Directory structure:
+└── dagiteferi-timeseries-portfolio-optimization/
+    ├── README.md
+    ├── requirements.txt
+    ├── logs/
+    ├── model/
+    │   └── optimized_lstm.keras
+    ├── notebooks/
+    │   ├── README.md
+    │   ├── Future_Forecasting.ipynb
+    │   ├── Preprocess_Explore_Data.ipynb
+    │   ├── __init__.py
+    │   ├── arima_forecasting.ipynb
+    │   ├── lstm.ipynb
+    │   ├── portfolio_optimization.ipynb
+    │   └── sarima_forecasting.ipynb
+    ├── scripts/
+    │   ├── README.md
+    │   ├── __init__.py
+    │   ├── arima.py
+    │   ├── data_cleaning.py
+    │   ├── eda.py
+    │   ├── future_forecast.py
+    │   ├── lstm.py
+    │   ├── portfolio_optimization.py
+    │   ├── sarima.py
+    │   ├── seasonal_decompose.py
+    │   ├── volatility_analysis.py
+    │   └── __pycache__/
+    ├── src/
+    │   ├── __init__.py
+    │   ├── data_loader.py
+    │   ├── fetch_data.py
+    │   ├── file_structure.py
+    │   └── __pycache__/
+    ├── tests/
+    │   └── __init__.py
+    └── .github/
+        └── workflows/
+            └── unittests.yml
+
    ```
 ---
 
